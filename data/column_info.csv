@@ -1,0 +1,89 @@
+column_zh,column,type
+ら戳,date,摸
+靡ㄩ絏,company_id,摸
+戈禦芥禬(眎),foreign_investors,计
+щ獺禦芥禬(眎),investment_banks ,计
+犁禦芥禬(眎),dealer,计
+璸禦芥禬(眎),all_institutional_investors,计
+戈禦芥禬ら计,foreign_investors_day,计
+щ獺禦芥禬ら计,investment_banks_days,计
+犁禦芥禬ら计,dealer_days,计
+猭禦芥禬ら计,all_institutional_investors_days,计
+赋菏,directors_stock_ratio,计
+赋菏计,directors_stock,计
+磕戈緇肂(眎),financing_balance,计
+磕ㄩ緇肂(眎),margin_balance,计
+ㄩ戈ゑ,sale_margin_purchase_ratio,计
+磕ㄩ糤搭ゑ瞯,margin_balance_ratio,计
+磕戈糤搭ゑ瞯,financing_balance_ratio,计
+200-400 眎(ゑ瞯),200_400_ratio,计
+400-600 眎(ゑ瞯),400_600_ratio,计
+600-800 眎(ゑ瞯),600_800_ratio,计
+800-1000眎(ゑ瞯),800_1000_ratio,计
+1000眎  (ゑ瞯),1000up_ratio,计
+カ,market_type,摸
+玻穨,industry,摸
+そ,company_name,摸
+玻穨嘿,industry_name,摸
+戈セ肂,capital,计
+砏家,scale,摸
+秨絃基(じ),open,计
+程蔼基(じ),high,计
+程基(じ),low,计
+Μ絃基(じ),close,计
+Θユ秖(),volume,计
+5らА基(じ),ma5,计
+10らА基(じ),ma10,计
+20らА基(じ),ma20,计
+60らА基(じ),ma60,计
+5らА秖,mavol_5,计
+10らА秖,mavol_10,计
+20らА秖,mavol_20,计
+60らА秖,mavol_60,计
+计嘿,index_name,摸
+犁Μ祇ガら,revenue_release_date,摸
+虫る犁Μ(じ),revenue_m,计
+虫る犁Μ(じ),revenue_m_lastyear,计
+虫る犁ΜΘ瞯, revenue_vs_lastyear_ratio,计
+虫る犁Μ籔るゑ, revenue_mom_ratio,计
+虫る犁Μ籔るゑ-Θる计, revenue_growth_month,计
+仓璸犁Μ(じ),cumulative_revenue,计
+仓璸犁Μ(じ),cumulative_revenue_lastyear,计
+仓璸犁ΜΘ瞯, cumulative_revenue_vs_lastyear_ratio,计
+﹗,Q,摸
+癩厨祇ガら,report_issued,摸
+–緇,EPS,计
+讽﹗﹗┏P/B,PB,计
+讽﹗﹗┏PSR,PSR,计
+讽﹗﹗┏P/E,PE,计
+ROA(C)祙玡玡ч侣玡,ROA_C,计
+ROA(A)祙玡,ROA_A,计
+ROA(B)祙玡ч侣玡,ROA_B,计
+ROE(A)⌒祙,ROE_A,计
+ROE(B)⌒盽尿痲,ROE_B,计
+犁穨痲瞯,operating_profit_margin,计
+犁穨痲Θ瞯,operating_profit_growth_rate,计
+犁穨痲跑笆瞯, operating_profit_variability_rate,计
+犁穨痲 /龟Μ戈セゑ,operating_profit_to_paid-up_capital_ratio,计
+盽尿痲瞯⌒祙,net_income_margin,计
+瞓跑笆瞯虫﹗,net_profit_variability_rate_Q,计
+祙玡玡ч侣玡瞓瞯,ebitda_margin,计
+祙玡瞓瞯, earnings_before_tax_margin,计
+祙玡瞓Θ瞯,earnings_before_tax_growth_rate,计
+祙瞓瞯,net_profit_margin,计
+祙瞓Θ瞯,net_profit_growth_rate,计
+﹗┏炊硄カ,stock_market_value_EOQ,计
+犁ΜΘ瞯,revenue_growth_rate,计
+犁Μ跑笆瞯,revenue_variability_rate,计
+瞓/戈玻,equity_to_assets_ratio,计
+羆戈玻Θ瞯,total_asset_growth_rate,计
+羆戈玻秅锣Ω计,total_asset_turnover_ratio,计
+穨Μや/犁Μ,NOIR,计
+犁穨を瞯,gross_profit_growth_rate,计
+犁穨をΘ瞯,gross_profit_growth_rate,计
+龟瞷綪砯をΘ瞯,realized_sales_gross_profit_growth_rate,计
+龟瞷綪砯を瞯, realized_sales_gross_profit_margin,计
+パ瞷瑈秖(D), free_cash_flow,计
+犁穨Μ瞓肂,net_operating_revenue,计
+狥舦痲羆肂,shareholders_equity,计
+ㄓ犁笲ぇ瞷瑈秖,cash_flow_from_operations,计

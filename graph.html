@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>股票概況</title>
+    <style>    
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    h2 ,p{
+        text-align: center; 
+    }
+    
+    .img_h {
+        height: 100%;
+        margin: 0 auto;
+        display: block; 
+        border: 2px solid #000;
+    }
+    .img_w {
+        width: 100%;
+        margin: 0 auto;
+        display: block; 
+        border: 2px solid #000;
+    }
+    
+    </style>
+
+
+</head>
+<body>
+    <h2>符合條件股票概況</h2>
+    <iframe id="my_iframe" src="graph/my_plot.html" style="width: 100%; height: 100%;"></iframe>
+    <iframe id="my_iframe" src="graph/my_pie_plot.html" style="width: 100%; height: 100%;"></iframe>
+    <iframe id="my_iframe" src="graph/my_bar_plot.html" style="width: 100%; height: 100%;"></iframe>
+    <p></p>
+    <h2>各feature圖示</h2>
+    <p>建議或是使用者指定圖表</p>
+    <img src="graph/scatter.png" alt="scatter" class="img_h"></br>
+    <img src="graph/catplot.png" alt="catplot" class="img_h"></br>
+    <img src="graph/pairplot.png" alt="pairplot" class="img_h"></br>
+    <img src="graph/countplot.png" alt="countplot" class="img_h"></br>
+    <img src="graph/displot.png" alt="displot" class="img_h"></br>
+    <img src="graph/regplot.png" alt="regplot" class="img_h"></br>
+    <img src="graph/violinplot.png" alt="violinplot" class="img_h"></br>
+    <img src="graph/bubbleplot.png" alt="bubbleplot" class="img_h"></br>
+    <p></p>
+    <h2>feature綜合分析圖</h2>
+    <p>將與股價變化最可能相關的變數排列組合，觀察交互關係</p>
+    <img src="graph/facetGrid_1.png" alt="facetGrid_1" class="img_w"></br>
+    <img src="graph/facetGrid_2.png" alt="facetGrid_2" class="img_w"></br>
+    <img src="graph/facetGrid_3.png" alt="facetGrid_3" class="img_w"></br>
+    <img src="graph/facetGrid_4.png" alt="facetGrid_4" class="img_w"></br>
+    <img src="graph/facetGrid_5.png" alt="facetGrid_5" class="img_w"></br>
+    <img src="graph/facetGrid_6.png" alt="facetGrid_6" class="img_w"></br>
+    <img src="graph/facetGrid_7.png" alt="facetGrid_7" class="img_w"></br>
+    <img src="graph/facetGrid_8.png" alt="facetGrid_8" class="img_w"></br>
+    <img src="graph/facetGrid_9.png" alt="facetGrid_9" class="img_w"></br>
+    <img src="graph/facetGrid_10.png" alt="facetGrid_10" class="img_w">
+</body>
+</html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<data>
+        <newX>
+        <name>FCF_OI</name>
+        <operand>自由現金流量(D)</operand>
+        <operand>營業收入淨額</operand>
+        <Formula>operant1/operant2</Formula>
+    </newX>
+    <newX>
+        <name>OCF_E</name>
+        <operand>來自營運之現金流量</operand>
+        <operand>股東權益總額</operand>
+        <Formula>operant1/operant2</Formula>
+    </newX>
+</data>
