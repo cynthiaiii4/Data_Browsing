@@ -14,13 +14,14 @@ class StockDataVisualizer:
     建立動態熱力圖
     '''
     def get_heat_map_all(self):
-        max_value= self.filtered_data['區間股價變化率'].max()
-        min_value = self.filtered_data['區間股價變化率'].min()
-        filtered_data=self.filtered_data[self.filtered_data['區間股價變化率'].notnull() | self.filtered_data['區間股價變化率'].notna()]
-        self.filtered_data['資本額(千萬)'] = (self.filtered_data['資本額']/10000000).round(2)
+        df=self.filtered_data
+        max_value= df['區間股價變化率'].max()
+        min_value = df['區間股價變化率'].min()
+        filtered_data=df[df['區間股價變化率'].notnull() | df['區間股價變化率'].notna()]
+        df['資本額(千萬)'] = (df['資本額']/10000000).round(2)
 
         fig = px.treemap(
-            filtered_data, 
+            df, 
             path=['公司'],  # category型
             values='資本額(千萬)', 
             color='區間股價變化率', 
@@ -32,15 +33,15 @@ class StockDataVisualizer:
         fig.update_traces(textinfo='label+value',textfont = dict(size = 10)) # 显示企业名称和市值，字体24
         fig.write_html('graph/my_plot.html')
         fig.show()
-        pass
+        
 
     '''
     建立靜態和動態圓餅圖。靜態用來顯示在pdf，動態用來顯示在html
     '''
     def get_industry_pie_all(self):
-        
+        df=self.filtered_data
         # 計算類別數量
-        category_counts = self.filtered_data['產業名稱'].value_counts()
+        category_counts = df['產業名稱'].value_counts()
 
         # 靜態圖
         # 獲取類別標籤和計數
@@ -62,8 +63,8 @@ class StockDataVisualizer:
         negative_counts = []
 
         for industry in pie_data['產業名稱']:
-            positive_count = len(self.filtered_data[(self.filtered_data['產業名稱'] == industry) & (self.filtered_data['區間股價變化率'] > 0)])
-            negative_count = len(self.filtered_data[(self.filtered_data['產業名稱'] == industry) & (self.filtered_data['區間股價變化率'] <= 0)])
+            positive_count = len(df[(df['產業名稱'] == industry) & (df['區間股價變化率'] > 0)])
+            negative_count = len(df[(df['產業名稱'] == industry) & (df['區間股價變化率'] <= 0)])
             positive_counts.append(positive_count)
             negative_counts.append(negative_count)
 
@@ -71,12 +72,12 @@ class StockDataVisualizer:
         pie_data['下跌家數'] = negative_counts
 
         hovertext = []
-        for row in pie_data.iterrows():
+        for _ ,row in pie_data.iterrows():
             hovertext.append(f"{row['產業名稱']}")
         # hover後的內容
         hoverinfo = []
         hovertemplate = []
-        for row in pie_data.iterrows():
+        for _, row in pie_data.iterrows():
             hoverinfo.append(f"{row['產業名稱']}<br>Counts: {row['Counts']}<br>上漲家數: {row['上漲家數']}<br>下跌家數: {row['下跌家數']}")
             hovertemplate.append(f"{row['產業名稱']}<br>Counts: {row['Counts']}<br>上漲家數: {row['上漲家數']}<br>下跌家數: {row['下跌家數']}")
 
@@ -91,23 +92,24 @@ class StockDataVisualizer:
         fig.update_traces(textposition='inside', textinfo='percent+label')
         fig.show()
         fig.write_html('graph/my_pie_plot.html')
-        pass
+        
 
     '''
     建立靜態和動態長條圖。靜態用來顯示在pdf，動態用來顯示在html
     '''
     def get_bar_chart_all(self):
+        df=self.filtered_data
         #靜態
         # 計算股價變化率的最小值和最大值
-        min_value = self.filtered_data['區間股價變化率'].min()
-        max_value = self.filtered_data['區間股價變化率'].max()
+        min_value = df['區間股價變化率'].min()
+        max_value = df['區間股價變化率'].max()
 
         # 計算分組區間，以間隔2在最大值和最小值間分群
         step = 2
         bins = list(range(int(min_value) - step, int(max_value) + 2 * step, step))
 
         # 將股價變化率分群
-        self.filtered_data['股價變化率分组'] = pd.cut(self.filtered_data['區間股價變化率'], bins=bins)
+        df['股價變化率分组'] = pd.cut(df['區間股價變化率'], bins=bins)
 
         # 計算分組內的公司數量
         grouped_data = self.filtered_data.groupby('股價變化率分组')['公司'].count()
@@ -145,4 +147,4 @@ class StockDataVisualizer:
         fig.show()
         fig.write_html('graph/my_bar_plot.html')
 
-        pass
+        
