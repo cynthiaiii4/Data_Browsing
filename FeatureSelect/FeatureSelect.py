@@ -5,6 +5,9 @@ from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import f_regression
 
 def FeatureSelect(filtered_data):
+
+    features_amount=5
+
     db=Database()
     column_type = db.get_column_type()
     category_columns = column_type[column_type['type'] == '類別']['column_zh'].tolist()
@@ -15,8 +18,7 @@ def FeatureSelect(filtered_data):
     features_fill = filtered_drop.fillna(0)
     y=features_fill['區間股價變化率']
     drop_col=['證券代碼','公司','區間股價變化','區間股價變化率','產業別','股價變化率分组']
-    filtered_clean = features_fill.drop(drop_col, axis=1)
-    
+    filtered_clean = features_fill.drop(drop_col, axis=1) 
     df_encoded = pd.DataFrame()
     for col in filtered_clean.columns:
         if col in category_columns:
@@ -24,31 +26,32 @@ def FeatureSelect(filtered_data):
             df_encoded = pd.concat([df_encoded, encoded_col], axis=1)
         else:
             df_encoded[col] = filtered_clean[col]
-    
-    # with pd.ExcelWriter('onehot.xlsx', engine='openpyxl') as writer:
-    #     df_encoded.to_excel(writer, index=False, sheet_name='Sheet1')
-    # 選擇要保留的特徵數
 
-    select_k = 5
+    # 計算每個特徵的得分
+    scores, _ = f_regression(df_encoded, y)
 
-    # 使用填補後的特徵進行特徵選擇
-    selection = SelectKBest(f_regression, k=select_k).fit(df_encoded, y)
+    # 創建一個 DataFrame，包含特徵名稱和對應的得分
+    feature_scores = pd.DataFrame({'Feature': df_encoded.columns, 'Score': scores})
 
-    # 顯示保留的欄位
-    selected_feature_names = df_encoded.columns[selection.get_support()]
+    # 按得分降序排序
+    feature_scores = feature_scores.sort_values(by='Score', ascending=False)
 
-    selected_features_info = {}  # 创建空字典
+    selected_feature_names = feature_scores['Feature'].to_list()
 
-    # 遍历选定的特征名
+
+    #依序取得排名前n的值
+    selected_features_info = {}  
+   
     for feature_name in selected_feature_names:
-        print(feature_name)
         parts = feature_name.split("_")
         if len(parts) > 0:
             result = parts[0]
         else:
             result = feature_name
-        # 使用 feature_name 作为键，查找对应的 type 值，并存入字典
+        # 使用 feature_name 為key，找到對應的type
         feature_type = column_type.loc[column_type['column_zh'] == result, 'type'].values[0]
         selected_features_info[result] = feature_type
-
+        # 如果已經找到所需特徵個數，退出迴圈
+        if len(selected_features_info) == features_amount:
+            break
     return selected_features_info
