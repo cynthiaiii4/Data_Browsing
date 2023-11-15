@@ -13,7 +13,6 @@ def Draw(data,features,*xml):
     pdf_filename = 'output_plots.pdf'
     pdf_pages = PdfPages(pdf_filename)
 
-    # 绘制其他图表并重复上述过程
     # 設置中文字體
     sns.set_style("whitegrid",{"font.sans-serif":['Microsoft JhengHei']})
     if not xml:
@@ -185,7 +184,7 @@ def Draw(data,features,*xml):
     # 顯示圖形
     # plt.show()
 
-    # 关闭PDF文件
+    # 關閉PDF文件
     pdf_pages.close()
 
-    print(f"所有图表已保存到 {pdf_filename}")
+    print(f"所有圖表已保存到 {pdf_filename}")
