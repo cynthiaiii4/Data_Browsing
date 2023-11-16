@@ -144,8 +144,8 @@ def Draw(data,features,*xml):
         row_name_b = row_name + '_b'
         # 動態設定 col 和 row 參數
         
-        data[col_name_b] = pd.qcut(data[col_name], q=5, duplicates='drop')
-        data[row_name_b] = pd.qcut(data[row_name], q=5, duplicates='drop')
+        data[col_name_b] = pd.qcut(data[col_name].fillna(0), q=5, duplicates='drop')
+        data[row_name_b] = pd.qcut(data[row_name].fillna(0), q=5, duplicates='drop')
         
         p = sns.FacetGrid(data, col=col_name_b, row=row_name_b, hue='證券代碼', margin_titles=True)
             # 自定義繪圖函數
