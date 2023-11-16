@@ -54,4 +54,5 @@ def FeatureSelect(filtered_data):
         # 如果已經找到所需特徵個數，退出迴圈
         if len(selected_features_info) == features_amount:
             break
+    print(selected_features_info) 
     return selected_features_info

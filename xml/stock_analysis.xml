@@ -6,41 +6,33 @@
   </Graph>
   <Graph>
     <ChartType>countplot</ChartType>
-    <X>規模</X>
+    <X>產業名稱</X>
   </Graph>
   <Graph>
     <Y>區間股價變化率</Y>
     <ChartType>violinplot</ChartType>
-    <X>規模</X>
+    <X>季報發布日</X>
   </Graph>
   <Graph>
     <Y>區間股價變化率</Y>
     <ChartType>catplot</ChartType>
     <Chart_parm>bar</Chart_parm>
-    <X>規模</X>
+    <X>產業名稱</X>
   </Graph>
   <Graph>
     <Y>區間股價變化率</Y>
     <ChartType>scatter</ChartType>
-    <X>開盤價(元)</X>
+    <X>法人買賣超日數</X>
   </Graph>
   <Graph>
     <Y>區間股價變化率</Y>
     <ChartType>regplot</ChartType>
-    <X>最低價(元)</X>
+    <X>外資買賣超日數</X>
   </Graph>
   <Graph>
     <Y>區間股價變化率</Y>
     <ChartType>bubbleplot</ChartType>
-    <X>收盤價(元)</X>
-    <X>成交量(千股)</X>
-  </Graph>
-  <Graph>
-    <Y>區間股價變化率</Y>
-    <ChartType>pairplot</ChartType>
-    <X>開盤價(元)</X>
-    <X>最高價(元)</X>
-    <X>最低價(元)</X>
-    <X>收盤價(元)</X>
+    <X>法人買賣超日數</X>
+    <X>ROA(C)稅前息前折舊前</X>
   </Graph>
 </StockAnalysis>
