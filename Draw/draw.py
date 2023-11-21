@@ -193,8 +193,15 @@ def Draw(data,features,*xml):
             # 設定 Y 軸刻度標籤格式，以包含負號
             ax.xaxis.set_major_formatter(ticker.FormatStrFormatter("%+.2f"))
             ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%+.2f"))
-            # 繪製散點圖或其他繪圖
             plt.scatter(*args, **kwargs)
+            # 繪製散點圖或其他繪圖
+            # 根據 scatter_col 的資料型態，選擇不同的繪圖方式
+            # if pd.api.types.is_numeric_dtype(args[0]):
+            #     plt.scatter(*args, **kwargs)
+            # else:
+            #     x_data = args[1] if len(args) > 1 else None
+            #     y_data = args[0] if len(args) > 0 else None
+            #     plt.bar(x=x_data, height=y_data, **kwargs)
 
         # 調整標題與圖的距離
         plt.subplots_adjust(top=0.7)  # 調整標題與圖的距離，可以根據需要調整top值
