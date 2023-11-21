@@ -14,7 +14,9 @@ def Draw(data,features,*xml):
     pdf_pages = PdfPages(pdf_filename)
 
     # 設置中文字體
-    sns.set_style("whitegrid",{"font.sans-serif":['Microsoft JhengHei']})
+    plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] # 解決中文顯示問題-設置字體為Microsoft JhengHei
+    plt.rcParams['axes.unicode_minus'] = False # 解決保存圖像是負號'-'顯示為方塊的問題
+    
     if not xml:
         xml_f ="xml/stock_analysis.xml"
     else:
@@ -54,25 +56,26 @@ def Draw(data,features,*xml):
         chart_type = values['ChartType']
         chart_parm = values['Chart_parm']
 
-        # # 設置中文字體
-        # sns.set_style("whitegrid",{"font.sans-serif":['Microsoft JhengHei']})
         if chart_type == 'scatter':
 
             # 使用 Seaborn 繪製散點圖
             fig = plt.figure()
             sns.scatterplot(data=data, x=values['X'][0], y=y)
+            plt.xticks(rotation=90)
             plt.title(f'Scatter Plot of {values["X"][0]} vs {y}')
             plt.savefig('graph/scatter.png')
-            pdf_start_time = time.time()
             pdf_pages.savefig(fig)
+            plt.show()
             plt.close()
         elif chart_type == 'catplot':
 
             fig = plt.figure()
             sns.catplot(x=values['X'][0], y=y, data=data, kind= chart_parm )  
+            plt.xticks(rotation=90)
             plt.title(f'Catplot of {values["X"][0]} vs {y}')
             plt.savefig('graph/catplot.png')
             pdf_pages.savefig(fig)
+            plt.show()
             plt.close()
 
         elif chart_type == 'pairplot':
@@ -81,45 +84,56 @@ def Draw(data,features,*xml):
             sns.pairplot(data, vars=values['X'])
             plt.savefig('graph/pairplot.png')
             pdf_pages.savefig(fig)
+            plt.show()
             plt.close()
 
         elif chart_type == 'countplot':
 
             fig = plt.figure()
             ax = sns.countplot(x=values['X'][0], data=data) 
+            plt.xticks(rotation=90)
             plt.savefig('graph/countplot.png')
             pdf_pages.savefig(fig)
+            plt.show()
             plt.close()
 
         elif chart_type == 'displot':
 
             fig = plt.figure()
             sns.displot(data=data[values['X'][0]], kde=True, bins=20)
+            plt.xticks(rotation=90)
             plt.savefig('graph/displot.png') 
             pdf_pages.savefig(fig)
+            plt.show()
             plt.close()
         elif chart_type == 'regplot':
 
             fig = plt.figure()
             ax = sns.regplot(x=values['X'][0], y=y, data=data)
+            plt.xticks(rotation=90)
             plt.savefig('graph/regplot.png') 
             pdf_pages.savefig(fig)
+            plt.show()
             plt.close()
         elif chart_type == 'violinplot':
 
             fig = plt.figure()
             sns.violinplot(x=data[values['X'][0]], y=data[y])
+            plt.xticks(rotation=90)
             x_axis = plt.gca().xaxis
             x_axis.set_tick_params(rotation=45)
             plt.savefig('graph/violinplot.png') 
             pdf_pages.savefig(fig)
+            plt.show()
             plt.close()
         elif chart_type == 'bubbleplot':
 
             fig = plt.figure()
             sns.scatterplot(data=data, x=values['X'][0], y=y, size=values['X'][1], legend=False, sizes=(20, 2000))
+            plt.xticks(rotation=90)
             plt.savefig('graph/bubbleplot.png') 
             pdf_pages.savefig(fig)
+            plt.show()
             plt.close()
         plt.close()
 
@@ -132,22 +146,41 @@ def Draw(data,features,*xml):
     # 使用combinations生成所有不重複的3個欄位名稱的組合
     combinations_list = list(combinations(features, 3))
     
-    # print('combinations_list')
-    # print(combinations_list)
+    print('combinations_list')
+    print(combinations_list)
     # 遍歷所有欄位名稱的組合
     facetGrid =1
+    # TODO: 測試待刪除
+    dropcol = ['產業名稱']
+
+    # 移除指定的元素
+    combinations_list = [combo for combo in combinations_list if not any(col in combo for col in dropcol)]
+    
+    
+    
     for combo in combinations_list:
 
         col_name, row_name, scatter_col = combo
         # 動態生成新的欄位名稱，將原名稱後面添加 '_b'
         col_name_b = col_name + '_b'
         row_name_b = row_name + '_b'
-        # 動態設定 col 和 row 參數
+        # 根據類型,動態設定 col 和 row 參數
         
-        data[col_name_b] = pd.qcut(data[col_name].fillna(0), q=5, duplicates='drop')
-        data[row_name_b] = pd.qcut(data[row_name].fillna(0), q=5, duplicates='drop')
+        # data[col_name_b] = pd.qcut(data[col_name].fillna(0), q=5, duplicates='drop')
+        # data[row_name_b] = pd.qcut(data[row_name].fillna(0), q=5, duplicates='drop')
         
+        if pd.api.types.is_numeric_dtype(data[col_name]):
+            data[col_name_b] = pd.qcut(data[col_name].fillna(0), q=5, duplicates='drop')
+        else:
+            data[col_name_b] = pd.Categorical(data[col_name].fillna("missing"))
+
+        if pd.api.types.is_numeric_dtype(data[row_name]):
+            data[row_name_b] = pd.qcut(data[row_name].fillna(0), q=5, duplicates='drop')
+        else:
+            data[row_name_b] = pd.Categorical(data[row_name].fillna("missing"))
+            
         p = sns.FacetGrid(data, col=col_name_b, row=row_name_b, hue='證券代碼', margin_titles=True)
+        
             # 自定義繪圖函數
         def custom_scatter(*args, **kwargs):
             ax = plt.gca()  # 獲取當前子圖的座標軸對象
@@ -168,15 +201,16 @@ def Draw(data,features,*xml):
         #設定標題
         p.fig.suptitle(f"在不同{col_name}(X) 和 {row_name}(Y)區間中，{scatter_col}(x)和股價變化率(y)的表現", fontsize=16)
         p.map(custom_scatter, scatter_col, '區間股價變化率')
-
+     
         for ax in p.axes.flat:
             ax.spines['bottom'].set_linewidth(3)
             ax.spines['left'].set_linewidth(3)
             ax.spines['bottom'].set_color('black')
             ax.spines['left'].set_color('black')
+        plt.show()
         pdf_pages.savefig(p.fig)
         p.fig.savefig(f'graph/facetGrid_{facetGrid}.png') 
-        plt.show()
+        
         plt.close()
         
         facetGrid+=1
