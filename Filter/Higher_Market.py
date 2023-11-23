@@ -1,5 +1,5 @@
 import pandas as pd
-import os
+import numpy as np
 from Filter.Market import Market
 
 def Higher_Market(s_data,company_data,mk_data,start_d,end_d):
@@ -12,16 +12,20 @@ def Higher_Market(s_data,company_data,mk_data,start_d,end_d):
     filtered_df = filtered_df.sort_values(by=["證券代碼", "日期"], ascending=[True, False])
     filtered_df = pd.merge(filtered_df, company_data, on='證券代碼', how='left')
 
-    price_diff = filtered_df.groupby('證券代碼')['收盤價(元)'].apply(lambda x: x.iloc[0] - x.iloc[1])
-    price_diff_percent = filtered_df.groupby('證券代碼')['收盤價(元)'].apply(lambda x: (x.iloc[0] - x.iloc[1])/x.iloc[1])*100
+    # price_diff = filtered_df.groupby('證券代碼')['收盤價(元)'].apply(lambda x: x.iloc[0] - x.iloc[1])
+    # price_diff_percent = filtered_df.groupby('證券代碼')['收盤價(元)'].apply(lambda x: (x.iloc[0] - x.iloc[1])/x.iloc[1])*100
+    price_diff = filtered_df.groupby('證券代碼')['收盤價(元)'].apply(lambda x: x.iloc[0] - x.iloc[1] if len(x) >= 2 else x.iloc[0])
+    price_diff_percent = filtered_df.groupby('證券代碼')['收盤價(元)'].apply(lambda x: ((x.iloc[0] - x.iloc[1])/x.iloc[1])*100 if len(x) >= 2 else 0)
+
     result_df = pd.DataFrame({
         '證券代碼': price_diff.index,
         '區間股價變化': price_diff.values,
         '區間股價變化率': price_diff_percent.values
     })
-    result_df['上市別'] = filtered_df['上市別'].iloc[::2].values
+    # result_df['上市別'] = filtered_df['上市別'].iloc[::2].values
     result_df['區間股價變化'] = result_df['區間股價變化'].round(2)
     result_df['區間股價變化率'] = result_df['區間股價變化率'].round(2)
+    result_df = pd.merge(result_df, filtered_df[['證券代碼', '上市別']].drop_duplicates(), on='證券代碼', how='left')
 
     #取得大盤表現
     market=Market(mk_data,date_1, date_2)
