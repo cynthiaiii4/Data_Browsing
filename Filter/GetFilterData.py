@@ -63,7 +63,7 @@ class GetFilterData:
         stock_fliter_data["區間股價變化"] = stock_fliter_data.groupby("證券代碼")["收盤價(元)"].transform(lambda x: x.iloc[0] - x.iloc[-1]).round(2)
 
         # 計算 "區間股價變化率"
-        stock_fliter_data["區間股價變化率"] = stock_fliter_data.groupby("證券代碼")["收盤價(元)"].transform(lambda x: (x.iloc[-1] - x.iloc[0]) / x.iloc[-1] * 100).round(2)
+        stock_fliter_data["區間股價變化率"] = stock_fliter_data.groupby("證券代碼")["收盤價(元)"].transform(lambda x: (x.iloc[0] - x.iloc[-1]) / x.iloc[-1] * 100).round(2)
 
 
         # 選擇每個分組的第一筆資料，包含 "區間股價變化" 和 "區間股價變化率" 欄位
