@@ -17,7 +17,7 @@ def FeatureSelect(filtered_data):
     filtered_drop = filtered_data_noinf.dropna(subset=['區間股價變化'])
     features_fill = filtered_drop.fillna(0)
     y=features_fill['區間股價變化率']
-    drop_col=['證券代碼','公司','區間股價變化','區間股價變化率','產業別','股價變化率分组']
+    drop_col=['證券代碼','公司','區間股價變化','區間股價變化率','產業別','股價變化率分组','季報發布日']
     filtered_clean = features_fill.drop(drop_col, axis=1) 
     df_encoded = pd.DataFrame()
     for col in filtered_clean.columns:
@@ -49,6 +49,7 @@ def FeatureSelect(filtered_data):
         else:
             result = feature_name
         # 使用 feature_name 為key，找到對應的type
+        print(result)
         feature_type = column_type.loc[column_type['column_zh'] == result, 'type'].values[0]
         selected_features_info[result] = feature_type
         # 如果已經找到所需特徵個數，退出迴圈
