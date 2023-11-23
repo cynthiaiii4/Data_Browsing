@@ -11,7 +11,7 @@
   <Graph>
     <Y>區間股價變化率</Y>
     <ChartType>violinplot</ChartType>
-    <X>季報發布日</X>
+    <X>產業名稱</X>
   </Graph>
   <Graph>
     <Y>區間股價變化率</Y>
@@ -22,17 +22,25 @@
   <Graph>
     <Y>區間股價變化率</Y>
     <ChartType>scatter</ChartType>
-    <X>法人買賣超日數</X>
+    <X>券資比</X>
   </Graph>
   <Graph>
     <Y>區間股價變化率</Y>
     <ChartType>regplot</ChartType>
-    <X>外資買賣超日數</X>
+    <X>20日均量</X>
   </Graph>
   <Graph>
     <Y>區間股價變化率</Y>
     <ChartType>bubbleplot</ChartType>
-    <X>法人買賣超日數</X>
-    <X>ROA(C)稅前息前折舊前</X>
+    <X>10日均量</X>
+    <X>單月營收與上月比％-成長月數</X>
+  </Graph>
+  <Graph>
+    <Y>區間股價變化率</Y>
+    <ChartType>pairplot</ChartType>
+    <X>券資比</X>
+    <X>單月營收與上月比％-成長月數</X>
+    <X>20日均量</X>
+    <X>10日均量</X>
   </Graph>
 </StockAnalysis>
