@@ -1,5 +1,4 @@
 import pandas as pd
-import os
 
 def MA(s_data):
    s_data = s_data.sort_values(by=["證券代碼", "日期"], ascending=[True, False])
