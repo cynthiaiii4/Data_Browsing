@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
+import numpy as np
 
 class StockDataVisualizer:
     def __init__(self, filtered_data):
@@ -15,9 +16,11 @@ class StockDataVisualizer:
     '''
     def get_heat_map_all(self):
         df=self.filtered_data
-        max_value= df['區間股價變化率'].max()
-        min_value = df['區間股價變化率'].min()
-        filtered_data=df[df['區間股價變化率'].notnull() | df['區間股價變化率'].notna()]
+        # max_value= df['區間股價變化率'].max()
+        # min_value = df['區間股價變化率'].min()
+        max_value = np.clip(df['區間股價變化率'].max(), 10, 50)
+        min_value = np.clip(df['區間股價變化率'].min(), -10, -50)
+        df=df[df['區間股價變化率'].notnull() | df['區間股價變化率'].notna()]
         df['資本額(千萬)'] = (df['資本額']/10000000).round(2)
 
         fig = px.treemap(
@@ -26,12 +29,13 @@ class StockDataVisualizer:
             values='資本額(千萬)', 
             color='區間股價變化率', 
             hover_data=['證券代碼','公司', '資本額', '規模', '產業名稱', '區間股價變化', '區間股價變化率'],
-            range_color = [min_value, max_value],
-            color_continuous_scale='Geyser', 
-            color_continuous_midpoint=0 , # 颜色变化中间值设置为增长率=0
+            range_color=[min_value,max_value],
+            # range_color=[-50, 50],
+            color_continuous_scale='RdYlGn_r', 
+            color_continuous_midpoint=0 , 
         )
-        fig.update_traces(textinfo='label+value',textfont = dict(size = 10)) # 显示企业名称和市值，字体24
-        fig.write_html('graph/my_plot.html')
+        fig.update_traces(textinfo='label+value',textfont = dict(size = 10)) 
+        fig.write_html('graph/4/my_plot.html')
         fig.show()
         
 
@@ -51,7 +55,7 @@ class StockDataVisualizer:
         plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=140)
         plt.title('類股支數占比')
         plt.axis('equal')  # 使圖形成圓形
-        plt.savefig('graph/my_pie_plot.png')
+        plt.savefig('graph/4/my_pie_plot.png')
         plt.show()
 
         # 動態圖
@@ -91,7 +95,7 @@ class StockDataVisualizer:
         )])
         fig.update_traces(textposition='inside', textinfo='percent+label')
         fig.show()
-        fig.write_html('graph/my_pie_plot.html')
+        fig.write_html('graph/4/my_pie_plot.html')
         
 
     '''
@@ -122,7 +126,7 @@ class StockDataVisualizer:
         plt.title("個股漲跌概況")
         plt.xlabel("股價變化率")
         plt.ylabel("數量")
-        plt.savefig('graph/my_bar_plot.png')
+        plt.savefig('graph/4/my_bar_plot.png')
         plt.show()
 
         #動態
@@ -145,6 +149,6 @@ class StockDataVisualizer:
         fig.update_xaxes(categoryorder='array', categoryarray=x_order)
 
         fig.show()
-        fig.write_html('graph/my_bar_plot.html')
+        fig.write_html('graph/4/my_bar_plot.html')
 
         
