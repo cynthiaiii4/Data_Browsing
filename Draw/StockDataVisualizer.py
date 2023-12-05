@@ -35,7 +35,7 @@ class StockDataVisualizer:
             color_continuous_midpoint=0 , 
         )
         fig.update_traces(textinfo='label+value',textfont = dict(size = 10)) 
-        fig.write_html('graph/1/my_plot.html')
+        fig.write_html('graph/7/my_plot.html')
         fig.show()
         
 
@@ -55,7 +55,7 @@ class StockDataVisualizer:
         plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=140)
         plt.title('類股支數占比')
         plt.axis('equal')  # 使圖形成圓形
-        plt.savefig('graph/1/my_pie_plot.png')
+        plt.savefig('graph/7/my_pie_plot.png')
         plt.show()
 
         # 動態圖
@@ -95,7 +95,7 @@ class StockDataVisualizer:
         )])
         fig.update_traces(textposition='inside', textinfo='percent+label')
         fig.show()
-        fig.write_html('graph/1/my_pie_plot.html')
+        fig.write_html('graph/7/my_pie_plot.html')
         
 
     '''
@@ -126,7 +126,7 @@ class StockDataVisualizer:
         plt.title("個股漲跌概況")
         plt.xlabel("股價變化率")
         plt.ylabel("數量")
-        plt.savefig('graph/1/my_bar_plot.png')
+        plt.savefig('graph/7/my_bar_plot.png')
         plt.show()
 
         #動態
@@ -149,6 +149,6 @@ class StockDataVisualizer:
         fig.update_xaxes(categoryorder='array', categoryarray=x_order)
 
         fig.show()
-        fig.write_html('graph/1/my_bar_plot.html')
+        fig.write_html('graph/7/my_bar_plot.html')
 
         

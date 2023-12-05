@@ -63,7 +63,7 @@ def Draw(data,features,*xml):
             sns.scatterplot(data=data, x=values['X'][0], y=y)
             plt.xticks(rotation=90)
             plt.title(f'Scatter Plot of {values["X"][0]} vs {y}')
-            plt.savefig('graph/1/scatter.png')
+            plt.savefig('graph/7/scatter.png')
             pdf_pages.savefig(fig)
             plt.show()
             plt.close()
@@ -73,7 +73,7 @@ def Draw(data,features,*xml):
             sns.catplot(x=values['X'][0], y=y, data=data, kind= chart_parm )  
             plt.xticks(rotation=90)
             plt.title(f'Catplot of {values["X"][0]} vs {y}')
-            plt.savefig('graph/1/catplot.png')
+            plt.savefig('graph/7/catplot.png')
             pdf_pages.savefig(fig)
             plt.show()
             plt.close()
@@ -82,7 +82,7 @@ def Draw(data,features,*xml):
 
             fig = plt.figure()
             sns.pairplot(data, vars=values['X'])
-            plt.savefig('graph/1/pairplot.png')
+            plt.savefig('graph/7/pairplot.png')
             pdf_pages.savefig(fig)
             plt.show()
             plt.close()
@@ -92,7 +92,7 @@ def Draw(data,features,*xml):
             fig = plt.figure()
             ax = sns.countplot(x=values['X'][0], data=data) 
             plt.xticks(rotation=90)
-            plt.savefig('graph/1/countplot.png')
+            plt.savefig('graph/7/countplot.png')
             pdf_pages.savefig(fig)
             plt.show()
             plt.close()
@@ -102,7 +102,7 @@ def Draw(data,features,*xml):
             fig = plt.figure()
             sns.displot(data=data[values['X'][0]], kde=True, bins=20)
             plt.xticks(rotation=90)
-            plt.savefig('graph/1/displot.png') 
+            plt.savefig('graph/7/displot.png') 
             pdf_pages.savefig(fig)
             plt.show()
             plt.close()
@@ -111,7 +111,7 @@ def Draw(data,features,*xml):
             fig = plt.figure()
             ax = sns.regplot(x=values['X'][0], y=y, data=data)
             plt.xticks(rotation=90)
-            plt.savefig('graph/1/regplot.png') 
+            plt.savefig('graph/7/regplot.png') 
             pdf_pages.savefig(fig)
             plt.show()
             plt.close()
@@ -122,7 +122,7 @@ def Draw(data,features,*xml):
             plt.xticks(rotation=90)
             x_axis = plt.gca().xaxis
             x_axis.set_tick_params(rotation=45)
-            plt.savefig('graph/1/violinplot.png') 
+            plt.savefig('graph/7/violinplot.png') 
             pdf_pages.savefig(fig)
             plt.show()
             plt.close()
@@ -131,7 +131,7 @@ def Draw(data,features,*xml):
             fig = plt.figure()
             sns.scatterplot(data=data, x=values['X'][0], y=y, size=values['X'][1], legend=False, sizes=(20, 2000))
             plt.xticks(rotation=90)
-            plt.savefig('graph/1/bubbleplot.png') 
+            plt.savefig('graph/7/bubbleplot.png') 
             pdf_pages.savefig(fig)
             plt.show()
             plt.close()
@@ -184,6 +184,12 @@ def Draw(data,features,*xml):
             else:
                 data[row_name_b] = pd.Categorical(data[row_name].fillna("missing"))
                 
+            # 先取得 row_name_b 欄位的唯一值，然後按照你想要的順序排序
+            # row_order = data[row_name_b].unique()
+            row_order = sorted(data[row_name_b], reverse=True)  # 由大到小排序
+
+            # 將 'row_name_b' 欄位轉換為 Categorical，並指定排序後的順序
+            data['row_name_b'] = pd.Categorical(data['row_name_b'], categories=row_order, ordered=True)
             p = sns.FacetGrid(data, col=col_name_b, row=row_name_b, hue='證券代碼', margin_titles=True)
             
                 # 自定義繪圖函數
@@ -220,7 +226,7 @@ def Draw(data,features,*xml):
                 ax.spines['left'].set_color('black')
             plt.show()
             pdf_pages.savefig(p.fig)
-            p.fig.savefig(f'graph/1/facetGrid_{facetGrid}.png') 
+            p.fig.savefig(f'graph/7/facetGrid_{facetGrid}.png') 
             
             plt.close()
             
