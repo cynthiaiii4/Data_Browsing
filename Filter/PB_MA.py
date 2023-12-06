@@ -45,7 +45,11 @@ def PB_MA(q_data,start_d,s_data):
     last_1_records = s_data.groupby('證券代碼').head(1)
 
     #找出均線多頭排列且股價在所有均線之上
-    filtered_df = last_1_records[(last_1_records['收盤價(元)'] > last_1_records['60日均價(元)'])]
+    # filtered_df = last_1_records[(last_1_records['收盤價(元)'] > last_1_records['60日均價(元)'])]
+
+    filtered_df = last_1_records[(last_1_records['收盤價(元)'] > last_1_records['5日均價(元)']) &
+               (last_1_records['5日均價(元)'] > last_1_records['10日均價(元)']) &
+               (last_1_records['10日均價(元)'] > last_1_records['20日均價(元)'])]
 
     selected_companies2=filtered_df['證券代碼'].to_list()
 
