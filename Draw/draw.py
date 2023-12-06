@@ -141,13 +141,22 @@ def Draw(data,features,*xml):
    
         
     # 創建一個 FacetGrid，但不指定 col 和 row 參數
-    p = sns.FacetGrid(data, hue='證券代碼')
+    # p = sns.FacetGrid(data, hue='證券代碼')
 
     # 使用combinations生成所有不重複的3個欄位名稱的組合
     combinations_list = list(combinations(features, 3))
-    
     print('combinations_list')
     print(combinations_list)
+    final_combinations = []
+
+    for combo in combinations_list:
+        # 對每個組合的元素進行旋轉，以獲得不同的順序
+        for i in range(len(combo)):
+            rotated_combo = combo[i:] + combo[:i]
+            final_combinations.append(rotated_combo)
+    
+    print('final_combinations')
+    print(final_combinations)
     # 遍歷所有欄位名稱的組合
     facetGrid =1
     # TODO: 測試待刪除
@@ -161,7 +170,7 @@ def Draw(data,features,*xml):
     else:
         q=5
     
-    for combo in combinations_list:
+    for combo in final_combinations:
 
         col_name, row_name, scatter_col = combo
 
@@ -169,6 +178,8 @@ def Draw(data,features,*xml):
             # 動態生成新的欄位名稱，將原名稱後面添加 '_b'
             col_name_b = col_name + '_b'
             row_name_b = row_name + '_b'
+            print(col_name_b)
+            print(row_name_b)
             # 根據類型,動態設定 col 和 row 參數
             
             # data[col_name_b] = pd.qcut(data[col_name].fillna(0), q=5, duplicates='drop')
@@ -204,7 +215,7 @@ def Draw(data,features,*xml):
                 # 設定 Y 軸刻度標籤格式，以包含負號
                 ax.xaxis.set_major_formatter(ticker.FormatStrFormatter("%+.2f"))
                 ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%+.2f"))
-                sns.regplot(x=x, y=y, *args, **kwargs)
+                sns.regplot(x=x, y=y,*args, **kwargs)
                 # plt.scatter(*args, **kwargs)
                 # 繪製散點圖或其他繪圖
                 #根據 scatter_col 的資料型態，選擇不同的繪圖方式
