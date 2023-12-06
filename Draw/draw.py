@@ -183,14 +183,14 @@ def Draw(data,features,*xml):
                 data[row_name_b] = pd.qcut(data[row_name].fillna(0), q=q, duplicates='drop')
             else:
                 data[row_name_b] = pd.Categorical(data[row_name].fillna("missing"))
-                
-            # 先取得 row_name_b 欄位的唯一值，然後按照你想要的順序排序
-            # row_order = data[row_name_b].unique()
-            row_order = sorted(data[row_name_b], reverse=True)  # 由大到小排序
+            # 變更排序，讓右上角子圖的值是(max,max)區間    
+            # 先取得 row_name_b 欄位的唯一值
+            row_categories = data[row_name_b].cat.categories
 
-            # 將 'row_name_b' 欄位轉換為 Categorical，並指定排序後的順序
-            data['row_name_b'] = pd.Categorical(data['row_name_b'], categories=row_order, ordered=True)
-            p = sns.FacetGrid(data, col=col_name_b, row=row_name_b, hue='證券代碼', margin_titles=True)
+            # 將 row_categories 反轉
+            row_order = reversed(row_categories)
+
+            p = sns.FacetGrid(data, col=col_name_b, row=row_name_b, hue='證券代碼', margin_titles=True,row_order=row_order)
             
                 # 自定義繪圖函數
             def custom_scatter(x,y,*args, **kwargs):
