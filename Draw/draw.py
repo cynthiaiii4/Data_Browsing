@@ -51,70 +51,80 @@ def Draw(data,features,*xml):
 
     #畫出每個圖
     #TODO:類別化
+    scatter=1
+    catplot=1
+    pairplot=1
+    countplot=1
+    displot=1
+    regplot=1
+    violinplot=1
+    bubbleplot=1
     for key, values in graph_dict.items():
         y = values['Y']
         chart_type = values['ChartType']
         chart_parm = values['Chart_parm']
 
         if chart_type == 'scatter':
-
             # 使用 Seaborn 繪製散點圖
             fig = plt.figure()
             sns.scatterplot(data=data, x=values['X'][0], y=y)
             plt.xticks(rotation=90)
             plt.title(f'Scatter Plot of {values["X"][0]} vs {y}')
-            plt.savefig('graph/1/scatter.png')
+            plt.savefig(f'graph/1/scatter{scatter}.png')
             pdf_pages.savefig(fig)
             plt.show()
             plt.close()
+            scatter+=1
         elif chart_type == 'catplot':
-
-            fig = plt.figure()
+            
+            fig = plt.figure(figsize=(10, 6))
             sns.catplot(x=values['X'][0], y=y, data=data, kind= chart_parm )  
             plt.xticks(rotation=90)
             plt.title(f'Catplot of {values["X"][0]} vs {y}')
-            plt.savefig('graph/1/catplot.png')
+            plt.savefig(f'graph/1/catplot{catplot}.png')
             pdf_pages.savefig(fig)
             plt.show()
             plt.close()
-
+            catplot+=1
         elif chart_type == 'pairplot':
-
+            
             fig = plt.figure()
             sns.pairplot(data, vars=values['X'])
-            plt.savefig('graph/1/pairplot.png')
+            plt.savefig(f'graph/1/pairplot{pairplot}.png')
             pdf_pages.savefig(fig)
             plt.show()
             plt.close()
-
+            pairplot+=1
         elif chart_type == 'countplot':
-
+            
             fig = plt.figure()
             ax = sns.countplot(x=values['X'][0], data=data) 
             plt.xticks(rotation=90)
-            plt.savefig('graph/1/countplot.png')
+            plt.savefig(f'graph/1/countplot{countplot}.png')
             pdf_pages.savefig(fig)
             plt.show()
             plt.close()
-
+            countplot+=1
         elif chart_type == 'displot':
 
             fig = plt.figure()
             sns.displot(data=data[values['X'][0]], kde=True, bins=20)
             plt.xticks(rotation=90)
-            plt.savefig('graph/1/displot.png') 
+            plt.savefig(f'graph/1/displot{displot}.png') 
             pdf_pages.savefig(fig)
             plt.show()
             plt.close()
+            displot+=1
         elif chart_type == 'regplot':
 
             fig = plt.figure()
             ax = sns.regplot(x=values['X'][0], y=y, data=data)
             plt.xticks(rotation=90)
-            plt.savefig('graph/1/regplot.png') 
+            plt.savefig(f'graph/1/regplot{regplot}.png') 
             pdf_pages.savefig(fig)
             plt.show()
             plt.close()
+            regplot+=1
         elif chart_type == 'violinplot':
 
             fig = plt.figure()
@@ -122,19 +132,21 @@ def Draw(data,features,*xml):
             plt.xticks(rotation=90)
             x_axis = plt.gca().xaxis
             x_axis.set_tick_params(rotation=45)
-            plt.savefig('graph/1/violinplot.png') 
+            plt.savefig(f'graph/1/violinplot{regplot}.png') 
             pdf_pages.savefig(fig)
             plt.show()
             plt.close()
+            violinplot+=1
         elif chart_type == 'bubbleplot':
 
             fig = plt.figure()
             sns.scatterplot(data=data, x=values['X'][0], y=y, size=values['X'][1], legend=False, sizes=(20, 2000))
             plt.xticks(rotation=90)
-            plt.savefig('graph/1/bubbleplot.png') 
+            plt.savefig(f'graph/1/bubbleplot{bubbleplot}.png') 
             pdf_pages.savefig(fig)
             plt.show()
             plt.close()
+            bubbleplot+=1
         plt.close()
 
 
