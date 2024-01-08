@@ -42,13 +42,23 @@ class Database:
     # 取得公司價量資訊(stock)
     def get_stock(self,start_d,end_d):
         DATA_DIR = 'data'
-        FILE_NAME1 = 'stock102507.csv'
-        data_path1 = os.path.join(DATA_DIR, FILE_NAME1)
-        df_from_db1 = pd.read_csv(data_path1)
-        df_from_db=df_from_db1
+        file_names = ['stock24_1.csv', 'stock24_2.csv', 'stock24_3.csv', 'stock24_4.csv', 'stock24_5.csv', 'stock24_6.csv', 'stock24_7.csv', 'stock24_8.csv', 'stock24_9.csv', 'stock24_10.csv', 'stock24_11.csv', 'stock24_12.csv']
+        combined_df_from_db = pd.DataFrame()
+        for file_name in file_names:
+            data_path = os.path.join(DATA_DIR, file_name)
+            df_from_db = pd.read_csv(data_path)
+            combined_df_from_db = pd.concat([combined_df_from_db, df_from_db], ignore_index=True)
+        combined_df_from_db['date'] = pd.to_datetime(combined_df_from_db['date'])
+        filtered_df_from_db = combined_df_from_db[(combined_df_from_db['date'] >= start_d) & (combined_df_from_db['date'] <= end_d)]
+        filtered_df_from_db = filtered_df_from_db.copy()
+        # DATA_DIR = 'data'
+        # FILE_NAME1 = 'stock102507.csv'
+        # data_path1 = os.path.join(DATA_DIR, FILE_NAME1)
+        # df_from_db1 = pd.read_csv(data_path1)
+        # df_from_db=df_from_db1
 
-        df_from_db['date'] = pd.to_datetime(df_from_db['date'])
-        filtered_df_from_db = df_from_db[(df_from_db['date'] >= start_d) & (df_from_db['date'] <= end_d)]
+        # df_from_db['date'] = pd.to_datetime(df_from_db['date'])
+        # filtered_df_from_db = df_from_db[(df_from_db['date'] >= start_d) & (df_from_db['date'] <= end_d)]
         filtered_df_from_db.rename(columns=self.column_mapping, inplace=True)
         return filtered_df_from_db
     # def get_stock(self,start_d,end_d):
@@ -91,12 +101,22 @@ class Database:
         
     # 取得指數價量資訊(market_index)
     def get_market_index(self,start_d,end_d):
-        DATA_DIR = ''
-        FILE_NAME = 'data/market1025.csv'
-        data_path = os.path.join(DATA_DIR, FILE_NAME)
-        df_from_db = pd.read_csv(data_path)
-        df_from_db['date'] = pd.to_datetime(df_from_db['date'])
-        filtered_df_from_db = df_from_db[(df_from_db['date'] >= start_d) & (df_from_db['date'] <= end_d)]
+        DATA_DIR = 'data'
+        file_names = ['market1025.csv', 'market24.csv']
+        combined_df_from_db = pd.DataFrame()
+        for file_name in file_names:
+            data_path = os.path.join(DATA_DIR, file_name)
+            df_from_db = pd.read_csv(data_path)
+            combined_df_from_db = pd.concat([combined_df_from_db, df_from_db], ignore_index=True)
+        combined_df_from_db['date'] = pd.to_datetime(combined_df_from_db['date'])
+        filtered_df_from_db = combined_df_from_db[(combined_df_from_db['date'] >= start_d) & (combined_df_from_db['date'] <= end_d)]
+        filtered_df_from_db = filtered_df_from_db.copy()
+        # DATA_DIR = ''
+        # FILE_NAME = 'data/market1025.csv'
+        # data_path = os.path.join(DATA_DIR, FILE_NAME)
+        # df_from_db = pd.read_csv(data_path)
+        # df_from_db['date'] = pd.to_datetime(df_from_db['date'])
+        # filtered_df_from_db = df_from_db[(df_from_db['date'] >= start_d) & (df_from_db['date'] <= end_d)]
         filtered_df_from_db.rename(columns=self.column_mapping, inplace=True)
         return filtered_df_from_db
     # def get_market_index(self,start_d,end_d):
@@ -171,7 +191,7 @@ class Database:
         # 取得籌碼資料(chips)
     def get_chips(self,start_d,end_d):
         DATA_DIR = 'data'
-        file_names = ['chips102501.csv', 'chips102504.csv', 'chips102507.csv', 'chips102509.csv']
+        file_names = ['combine_chips.csv']
         combined_df_from_db = pd.DataFrame()
         for file_name in file_names:
             data_path = os.path.join(DATA_DIR, file_name)
@@ -179,6 +199,7 @@ class Database:
             combined_df_from_db = pd.concat([combined_df_from_db, df_from_db], ignore_index=True)
         combined_df_from_db['date'] = pd.to_datetime(combined_df_from_db['date'])
         filtered_df_from_db = combined_df_from_db[(combined_df_from_db['date'] >= start_d) & (combined_df_from_db['date'] <= end_d)]
+        filtered_df_from_db = filtered_df_from_db.copy()
         filtered_df_from_db.rename(columns=self.column_mapping, inplace=True)
         return filtered_df_from_db
     # def get_chips(self,start_d,end_d):
@@ -227,10 +248,19 @@ class Database:
         
     # 取得月報資料(finance_report_m)
     def get_finance_report_m(self):
-        DATA_DIR = ''
-        FILE_NAME = 'data/finalreport_m1025.csv'
-        data_path = os.path.join(DATA_DIR, FILE_NAME)
-        df_from_db = pd.read_csv(data_path)
+        DATA_DIR = 'data'
+        file_names = ['finalreport_m1025.csv','finalreport_m1231.csv']
+        combined_df_from_db = pd.DataFrame()
+        for file_name in file_names:
+            data_path = os.path.join(DATA_DIR, file_name)
+            df_from_db = pd.read_csv(data_path)
+            combined_df_from_db = pd.concat([combined_df_from_db, df_from_db], ignore_index=True)
+        combined_df_from_db['m_date'] = pd.to_datetime(combined_df_from_db['m_date'])
+        df_from_db=combined_df_from_db
+        # DATA_DIR = ''
+        # FILE_NAME = 'data/finalreport_m1025.csv'
+        # data_path = os.path.join(DATA_DIR, FILE_NAME)
+        # df_from_db = pd.read_csv(data_path)
         df_from_db.rename(columns=self.column_mapping, inplace=True)
         return df_from_db
     # def get_finance_report_m(self):
@@ -267,10 +297,19 @@ class Database:
         
     # 取得季報資料(finance_report_q)
     def get_finance_report_q(self):
-        DATA_DIR = ''
-        FILE_NAME = 'data/finalreport_Q10253.csv'
-        data_path = os.path.join(DATA_DIR, FILE_NAME)
-        df_from_db = pd.read_csv(data_path)
+        DATA_DIR = 'data'
+        file_names = ['finalreport_Q10253.csv','finalreport_Q24.csv']
+        combined_df_from_db = pd.DataFrame()
+        for file_name in file_names:
+            data_path = os.path.join(DATA_DIR, file_name)
+            df_from_db = pd.read_csv(data_path)
+            combined_df_from_db = pd.concat([combined_df_from_db, df_from_db], ignore_index=True)
+        combined_df_from_db['q_date'] = pd.to_datetime(combined_df_from_db['q_date'])
+        df_from_db=combined_df_from_db
+        # DATA_DIR = ''
+        # FILE_NAME = 'data/finalreport_Q10253.csv'
+        # data_path = os.path.join(DATA_DIR, FILE_NAME)
+        # df_from_db = pd.read_csv(data_path)
         df_from_db.rename(columns=self.column_mapping, inplace=True)
         return df_from_db
     # def get_finance_report_q(self):
