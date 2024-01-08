@@ -22,25 +22,25 @@
   <Graph>
     <Y>區間股價變化率</Y>
     <ChartType>scatter</ChartType>
-    <X>融券餘額(張)</X>
+    <X>區間融資餘額(張)變化</X>
   </Graph>
   <Graph>
     <Y>區間股價變化率</Y>
     <ChartType>regplot</ChartType>
-    <X>單月營收與上月比％</X>
+    <X>券資比</X>
   </Graph>
   <Graph>
     <Y>區間股價變化率</Y>
     <ChartType>bubbleplot</ChartType>
+    <X>10日均量</X>
     <X>成交量(千股)</X>
-    <X>合計買賣超(張)</X>
   </Graph>
   <Graph>
     <Y>區間股價變化率</Y>
     <ChartType>pairplot</ChartType>
+    <X>區間融資餘額(張)變化</X>
     <X>融券餘額(張)</X>
     <X>券資比</X>
-    <X>單月營收與上月比％</X>
-    <X>成交量(千股)</X>
+    <X>10日均量</X>
   </Graph>
 </StockAnalysis>
