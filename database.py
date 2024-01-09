@@ -166,8 +166,8 @@ class Database:
         #TODO:規模何時算?
         df_from_db = df_from_db.sort_values(by='capital', ascending=False)
         df_from_db['scale'] = '小'
-        df_from_db.loc[:50, 'scale'] = '大'
-        df_from_db.loc[50:150, 'scale'] = '中'
+        df_from_db.loc[df_from_db.sort_values(by='capital', ascending=False).index[:50], 'scale'] = '大'
+        df_from_db.loc[df_from_db.sort_values(by='capital', ascending=False).index[50:150], 'scale'] = '中'
         df_from_db.rename(columns=self.column_mapping, inplace=True)
         return df_from_db
     # def get_company_basic(self):
