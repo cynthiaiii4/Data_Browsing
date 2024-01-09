@@ -103,7 +103,7 @@ class GetFilterData:
         ch_fliter_data["區間400-600 張(比率)變化"] = ch_fliter_data.groupby("證券代碼")["400-600 張(比率)"].transform(lambda x: x.iloc[0] - x.iloc[-1]).round(2)
         ch_fliter_data["區間600-800 張(比率)變化"] = ch_fliter_data.groupby("證券代碼")["600-800 張(比率)"].transform(lambda x: x.iloc[0] - x.iloc[-1]).round(2)
         ch_fliter_data["區間800-1000張(比率)變化"] = ch_fliter_data.groupby("證券代碼")["800-1000張(比率)"].transform(lambda x: x.iloc[0] - x.iloc[-1]).round(2)
-        ch_fliter_data["區間1000張以上  (比率)變化"] = ch_fliter_data.groupby("證券代碼")["1000張以上  (比率)"].transform(lambda x: x.iloc[0] - x.iloc[-1]).round(2)
+        ch_fliter_data["區間1000張以上(比率)變化"] = ch_fliter_data.groupby("證券代碼")["1000張以上(比率)"].transform(lambda x: x.iloc[0] - x.iloc[-1]).round(2)
 
 
         # 定義一個函數計算區間變化率，處理分母為零的情況

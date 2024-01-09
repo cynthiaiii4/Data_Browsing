@@ -6,18 +6,18 @@
   </Graph>
   <Graph>
     <ChartType>countplot</ChartType>
-    <X>規模</X>
+    <X>產業名稱</X>
   </Graph>
   <Graph>
     <Y>區間股價變化率</Y>
     <ChartType>violinplot</ChartType>
-    <X>規模</X>
+    <X>產業名稱</X>
   </Graph>
   <Graph>
     <Y>區間股價變化率</Y>
     <ChartType>catplot</ChartType>
     <Chart_parm>bar</Chart_parm>
-    <X>規模</X>
+    <X>產業名稱</X>
   </Graph>
   <Graph>
     <Y>區間股價變化率</Y>
@@ -27,20 +27,20 @@
   <Graph>
     <Y>區間股價變化率</Y>
     <ChartType>regplot</ChartType>
-    <X>券資比</X>
+    <X>ROE(A)－稅後</X>
   </Graph>
   <Graph>
     <Y>區間股價變化率</Y>
     <ChartType>bubbleplot</ChartType>
-    <X>10日均量</X>
-    <X>成交量(千股)</X>
+    <X>區間1000張以上(比率)變化</X>
+    <X>ROA(A)稅後息前</X>
   </Graph>
   <Graph>
     <Y>區間股價變化率</Y>
     <ChartType>pairplot</ChartType>
     <X>區間融資餘額(張)變化</X>
-    <X>融券餘額(張)</X>
-    <X>券資比</X>
-    <X>10日均量</X>
+    <X>ROA(A)稅後息前</X>
+    <X>ROE(A)－稅後</X>
+    <X>區間1000張以上(比率)變化</X>
   </Graph>
 </StockAnalysis>

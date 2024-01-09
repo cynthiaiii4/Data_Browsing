@@ -38,18 +38,17 @@ def FeatureSelect(filtered_data):
 
     selected_feature_names = feature_scores['Feature'].to_list()
 
-
     #依序取得排名前n的值
     selected_features_info = {}  
    
     for feature_name in selected_feature_names:
+        
         parts = feature_name.split("_")
         if len(parts) > 0:
             result = parts[0]
         else:
             result = feature_name
         # 使用 feature_name 為key，找到對應的type
-        print(result)
         feature_type = column_type.loc[column_type['column_zh'] == result, 'type'].values[0]
         selected_features_info[result] = feature_type
         # 如果已經找到所需特徵個數，退出迴圈
