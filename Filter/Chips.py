@@ -1,4 +1,3 @@
-import pandas as pd
 import xml.etree.ElementTree as ET
 
 # role:哪個法人
