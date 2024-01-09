@@ -7,7 +7,7 @@ import matplotlib.ticker as ticker
 from itertools import combinations
 import time
 
-def Draw(data,features,*xml):
+def FeatureVisualizer(data,features,*xml):
     # 建一个PDF文件
     #TODO:檔名加日期時間
     pdf_filename = 'output_plots.pdf'
