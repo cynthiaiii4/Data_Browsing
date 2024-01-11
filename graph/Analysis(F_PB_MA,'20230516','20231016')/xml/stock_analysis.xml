@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<StockAnalysis>
+  <Graph>
+    <ChartType>displot</ChartType>
+    <X>區間股價變化率</X>
+  </Graph>
+  <Graph>
+    <ChartType>countplot</ChartType>
+    <X>規模</X>
+  </Graph>
+  <Graph>
+    <Y>區間股價變化率</Y>
+    <ChartType>violinplot</ChartType>
+    <X>規模</X>
+  </Graph>
+  <Graph>
+    <Y>區間股價變化率</Y>
+    <ChartType>catplot</ChartType>
+    <Chart_parm>bar</Chart_parm>
+    <X>規模</X>
+  </Graph>
+  <Graph>
+    <Y>區間股價變化率</Y>
+    <ChartType>scatter</ChartType>
+    <X>區間融資餘額(張)變化</X>
+  </Graph>
+  <Graph>
+    <Y>區間股價變化率</Y>
+    <ChartType>regplot</ChartType>
+    <X>ROE(A)－稅後</X>
+  </Graph>
+  <Graph>
+    <Y>區間股價變化率</Y>
+    <ChartType>bubbleplot</ChartType>
+    <X>ROE(B)－常續利益</X>
+    <X>區間融券餘額(張)變化</X>
+  </Graph>
+  <Graph>
+    <Y>區間股價變化率</Y>
+    <ChartType>pairplot</ChartType>
+    <X>區間融資餘額(張)變化</X>
+    <X>區間融資餘額(張)變化率</X>
+    <X>ROE(A)－稅後</X>
+    <X>ROE(B)－常續利益</X>
+  </Graph>
+</StockAnalysis>

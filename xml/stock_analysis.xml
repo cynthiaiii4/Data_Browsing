@@ -22,25 +22,25 @@
   <Graph>
     <Y>區間股價變化率</Y>
     <ChartType>scatter</ChartType>
-    <X>券資比</X>
+    <X>區間融資餘額(張)變化</X>
   </Graph>
   <Graph>
     <Y>區間股價變化率</Y>
     <ChartType>regplot</ChartType>
-    <X>20日均量</X>
+    <X>ROE(A)－稅後</X>
   </Graph>
   <Graph>
     <Y>區間股價變化率</Y>
     <ChartType>bubbleplot</ChartType>
-    <X>累計營收成長率％</X>
-    <X>60日均量</X>
+    <X>ROE(B)－常續利益</X>
+    <X>區間融券餘額(張)變化</X>
   </Graph>
   <Graph>
     <Y>區間股價變化率</Y>
     <ChartType>pairplot</ChartType>
-    <X>券資比</X>
     <X>區間融資餘額(張)變化</X>
-    <X>20日均量</X>
-    <X>累計營收成長率％</X>
+    <X>區間融資餘額(張)變化率</X>
+    <X>ROE(A)－稅後</X>
+    <X>ROE(B)－常續利益</X>
   </Graph>
 </StockAnalysis>
