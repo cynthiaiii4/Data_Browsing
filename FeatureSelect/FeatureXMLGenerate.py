@@ -17,7 +17,7 @@ def FeatureXMLGenerate(features):
     chart_type=ET.Element("ChartType")
     chart_type.text = "displot"
     x_element = ET.Element("X")
-    x_element.text = "區間股價變化率"
+    x_element.text = "區間股價變化率(最高價)"
     graph.append(chart_type)
     graph.append(x_element)
     root.append(graph)
@@ -35,7 +35,7 @@ def FeatureXMLGenerate(features):
     #violinplot
     graph = ET.Element("Graph")
     y_element=ET.Element("Y")
-    y_element.text = "區間股價變化率"
+    y_element.text = "區間股價變化率(最高價)"
     graph.append(y_element)
     chart_type=ET.Element("ChartType")
     chart_type.text = "violinplot"
@@ -51,7 +51,7 @@ def FeatureXMLGenerate(features):
     #catplot
     graph = ET.Element("Graph")
     y_element=ET.Element("Y")
-    y_element.text = "區間股價變化率"
+    y_element.text = "區間股價變化率(最高價)"
     graph.append(y_element)
     chart_type=ET.Element("ChartType")
     chart_type.text = "catplot"
@@ -70,7 +70,7 @@ def FeatureXMLGenerate(features):
     #scatter
     graph = ET.Element("Graph")
     y_element=ET.Element("Y")
-    y_element.text = "區間股價變化率"
+    y_element.text = "區間股價變化率(最高價)"
     graph.append(y_element)
     chart_type=ET.Element("ChartType")
     chart_type.text = "scatter"
@@ -83,7 +83,7 @@ def FeatureXMLGenerate(features):
     #regplot
     graph = ET.Element("Graph")
     y_element=ET.Element("Y")
-    y_element.text = "區間股價變化率"
+    y_element.text = "區間股價變化率(最高價)"
     graph.append(y_element)
     chart_type=ET.Element("ChartType")
     chart_type.text = "regplot"
@@ -97,7 +97,7 @@ def FeatureXMLGenerate(features):
     if len(numeric_features)>1:
         graph = ET.Element("Graph")
         y_element=ET.Element("Y")
-        y_element.text = "區間股價變化率"
+        y_element.text = "區間股價變化率(最高價)"
         graph.append(y_element)
         chart_type=ET.Element("ChartType")
         chart_type.text = "bubbleplot"
@@ -120,7 +120,7 @@ def FeatureXMLGenerate(features):
     if len(numeric_features)>3:
         graph = ET.Element("Graph")
         y_element=ET.Element("Y")
-        y_element.text = "區間股價變化率"
+        y_element.text = "區間股價變化率(最高價)"
         graph.append(y_element)
         chart_type=ET.Element("ChartType")
         chart_type.text = "pairplot"

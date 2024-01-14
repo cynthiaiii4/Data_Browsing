@@ -19,12 +19,12 @@ def Higher_Market(s_data,company_data,mk_data,start_d,end_d):
 
     result_df = pd.DataFrame({
         '證券代碼': price_diff.index,
-        '區間股價變化': price_diff.values,
-        '區間股價變化率': price_diff_percent.values
+        '區間股價變化(最高價)': price_diff.values,
+        '區間股價變化率(最高價)': price_diff_percent.values
     })
     # result_df['上市別'] = filtered_df['上市別'].iloc[::2].values
-    result_df['區間股價變化'] = result_df['區間股價變化'].round(2)
-    result_df['區間股價變化率'] = result_df['區間股價變化率'].round(2)
+    result_df['區間股價變化(最高價)'] = result_df['區間股價變化(最高價)'].round(2)
+    result_df['區間股價變化率(最高價)'] = result_df['區間股價變化率(最高價)'].round(2)
     result_df = pd.merge(result_df, filtered_df[['證券代碼', '上市別']].drop_duplicates(), on='證券代碼', how='left')
 
     #取得大盤表現
@@ -33,8 +33,8 @@ def Higher_Market(s_data,company_data,mk_data,start_d,end_d):
     tse_df = result_df[result_df['上市別'] == 'TSE']
     otc_df = result_df[result_df['上市別'] == 'OTC']
     #篩選
-    tse_filtered = tse_df[tse_df['區間股價變化率'] > market['stock_index_var'].iloc[0]]
-    otc_filtered = otc_df[otc_df['區間股價變化率'] > market['otc_var'].iloc[0]]
+    tse_filtered = tse_df[tse_df['區間股價變化率(最高價)'] > market['stock_index_var'].iloc[0]]
+    otc_filtered = otc_df[otc_df['區間股價變化率(最高價)'] > market['otc_var'].iloc[0]]
 
     filtered_df = pd.concat([tse_filtered, otc_filtered])
     selected_companies=filtered_df['證券代碼'].to_list()

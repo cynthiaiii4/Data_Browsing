@@ -14,10 +14,10 @@ def FeatureSelect(filtered_data):
 
     # 使用 pd.get_dummies 進行 One-Hot Encoding
     filtered_data_noinf = filtered_data.replace([np.inf, -np.inf], np.nan).dropna()
-    filtered_drop = filtered_data_noinf.dropna(subset=['區間股價變化'])
+    filtered_drop = filtered_data_noinf.dropna(subset=['區間股價變化(最高價)'])
     features_fill = filtered_drop.fillna(0)
-    y=features_fill['區間股價變化率']
-    drop_col=['證券代碼','公司','區間股價變化','區間股價變化率','產業別','股價變化率分组','季報發布日']
+    y=features_fill['區間股價變化率(最高價)']
+    drop_col=['證券代碼','公司','區間股價變化(最高價)','區間股價變化率(最高價)','產業別','股價變化率分组','季報發布日','分析首日','最高價日期']
     filtered_clean = features_fill.drop(drop_col, axis=1) 
     df_encoded = pd.DataFrame()
     for col in filtered_clean.columns:

@@ -16,19 +16,19 @@ class StockDataVisualizer:
     '''
     def get_heat_map_all(self):
         df=self.filtered_data
-        # max_value= df['區間股價變化率'].max()
-        # min_value = df['區間股價變化率'].min()
-        max_value = np.clip(df['區間股價變化率'].max(), 10, 50)
-        min_value = np.clip(df['區間股價變化率'].min(), -10, -50)
-        df=df[df['區間股價變化率'].notnull() | df['區間股價變化率'].notna()]
+        # max_value= df['區間股價變化率(最高價)'].max()
+        # min_value = df['區間股價變化率(最高價)'].min()
+        max_value = np.clip(df['區間股價變化率(最高價)'].max(), 10, 50)
+        min_value = np.clip(df['區間股價變化率(最高價)'].min(), -10, -50)
+        df=df[df['區間股價變化率(最高價)'].notnull() | df['區間股價變化率(最高價)'].notna()]
         df['資本額(千萬)'] = (df['資本額']/10000000).round(2)
 
         fig = px.treemap(
             df, 
             path=['公司'],  # category型
             values='資本額(千萬)', 
-            color='區間股價變化率', 
-            hover_data=['證券代碼','公司', '資本額', '規模', '產業名稱', '區間股價變化', '區間股價變化率'],
+            color='區間股價變化率(最高價)', 
+            hover_data=['證券代碼','公司', '資本額', '規模', '產業名稱', '區間股價變化率(最高價)', '區間股價變化率(最高價)'],
             range_color=[min_value,max_value],
             # range_color=[-50, 50],
             color_continuous_scale='RdYlGn_r', 
@@ -62,13 +62,13 @@ class StockDataVisualizer:
         # 建立數據df
         pie_data = pd.DataFrame({'產業名稱': category_counts.index, 'Counts': category_counts.values})
 
-        # 計算同一產業下，區間股價變化率>0和<=0的數量
+        # 計算同一產業下，區間股價變化率(最高價)>0和<=0的數量
         positive_counts = []
         negative_counts = []
 
         for industry in pie_data['產業名稱']:
-            positive_count = len(df[(df['產業名稱'] == industry) & (df['區間股價變化率'] > 0)])
-            negative_count = len(df[(df['產業名稱'] == industry) & (df['區間股價變化率'] <= 0)])
+            positive_count = len(df[(df['產業名稱'] == industry) & (df['區間股價變化率(最高價)'] > 0)])
+            negative_count = len(df[(df['產業名稱'] == industry) & (df['區間股價變化率(最高價)'] <= 0)])
             positive_counts.append(positive_count)
             negative_counts.append(negative_count)
 
@@ -105,15 +105,15 @@ class StockDataVisualizer:
         df=self.filtered_data
         #靜態
         # 計算股價變化率的最小值和最大值
-        min_value = df['區間股價變化率'].min()
-        max_value = df['區間股價變化率'].max()
+        min_value = df['區間股價變化率(最高價)'].min()
+        max_value = df['區間股價變化率(最高價)'].max()
 
         # 計算分組區間，以間隔2在最大值和最小值間分群
         step = 2
         bins = list(range(int(min_value) - step, int(max_value) + 2 * step, step))
 
         # 將股價變化率分群
-        df['股價變化率分组'] = pd.cut(df['區間股價變化率'], bins=bins)
+        df['股價變化率分组'] = pd.cut(df['區間股價變化率(最高價)'], bins=bins)
 
         # 計算分組內的公司數量
         grouped_data = self.filtered_data.groupby('股價變化率分组')['公司'].count()

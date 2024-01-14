@@ -381,7 +381,7 @@ class Database:
         return column_mapping
     def get_column_type(self):
         DATA_DIR = ''
-        FILE_NAME = 'data/column_info1.csv'
+        FILE_NAME = 'data/column_info2.csv'
         data_path = os.path.join(DATA_DIR, FILE_NAME)
         df_from_db = pd.read_csv(data_path)
         return df_from_db
