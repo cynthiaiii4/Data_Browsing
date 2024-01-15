@@ -50,6 +50,9 @@ class Database:
             combined_df_from_db = pd.concat([combined_df_from_db, df_from_db], ignore_index=True)
         combined_df_from_db['date'] = pd.to_datetime(combined_df_from_db['date'])
         filtered_df_from_db = combined_df_from_db[(combined_df_from_db['date'] >= start_d) & (combined_df_from_db['date'] <= end_d)]
+         # 缺值補為 0
+        columns_to_fill = ['open', 'high', 'low', 'close', 'volume', 'ma5', 'ma10', 'ma20', 'ma60', 'mavol_5', 'mavol_10', 'mavol_20', 'mavol_60']
+        filtered_df_from_db[columns_to_fill] = filtered_df_from_db[columns_to_fill].fillna(0)
         filtered_df_from_db = filtered_df_from_db.copy()
         # DATA_DIR = 'data'
         # FILE_NAME1 = 'stock102507.csv'

@@ -76,7 +76,7 @@ def FeatureXMLGenerate(features):
     chart_type.text = "scatter"
     graph.append(chart_type)
     x_element = ET.Element("X")
-    x_element.text = numeric_features[0]
+    x_element.text = numeric_features[2]
     graph.append(x_element)
     root.append(graph)
 
@@ -89,7 +89,7 @@ def FeatureXMLGenerate(features):
     chart_type.text = "regplot"
     graph.append(chart_type)
     x_element = ET.Element("X")
-    x_element.text = numeric_features[2]
+    x_element.text = numeric_features[0]
     graph.append(x_element)
     root.append(graph)
 

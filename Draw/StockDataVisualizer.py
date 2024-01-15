@@ -4,6 +4,7 @@ import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
 import numpy as np
+import math
 
 class StockDataVisualizer:
     def __init__(self, filtered_data):
@@ -103,6 +104,12 @@ class StockDataVisualizer:
     '''
     def get_bar_chart_all(self):
         df=self.filtered_data
+
+        # 將 NaN 替換為 0
+        df['區間股價變化率(最高價)'].replace({np.nan: 0}, inplace=True)
+
+        # 將無窮大和無窮小值替換為 0
+        df['區間股價變化率(最高價)'].replace({np.inf: 0, -np.inf: 0}, inplace=True)
         #靜態
         # 計算股價變化率的最小值和最大值
         min_value = df['區間股價變化率(最高價)'].min()
