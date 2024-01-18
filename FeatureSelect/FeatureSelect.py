@@ -14,10 +14,10 @@ def FeatureSelect(filtered_data):
 
     # 使用 pd.get_dummies 進行 One-Hot Encoding
     filtered_data_noinf = filtered_data.replace([np.inf, -np.inf], np.nan).dropna()
-    filtered_drop = filtered_data_noinf.dropna(subset=['區間股價變化(最高價)'])
+    filtered_drop = filtered_data_noinf.dropna(subset=['區間最大價差'])
     features_fill = filtered_drop.fillna(0)
-    y=features_fill['區間股價變化率(最高價)']
-    drop_col=['證券代碼','公司','區間股價變化(最高價)','區間股價變化率(最高價)','產業別','股價變化率分组','季報發布日','分析首日','最高價日期']
+    y=features_fill['區間最大股價變化率']
+    drop_col=['證券代碼','公司','區間最大價差','區間最大股價變化率','產業別','股價變化率分组','季報發布日','營收發布日','區間最高價(元)']
     filtered_clean = features_fill.drop(drop_col, axis=1) 
     df_encoded = pd.DataFrame()
     for col in filtered_clean.columns:
@@ -48,6 +48,7 @@ def FeatureSelect(filtered_data):
             result = parts[0]
         else:
             result = feature_name
+        print(result)
         # 使用 feature_name 為key，找到對應的type
         feature_type = column_type.loc[column_type['column_zh'] == result, 'type'].values[0]
         selected_features_info[result] = feature_type

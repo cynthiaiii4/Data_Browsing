@@ -1,0 +1,106 @@
+﻿column_zh,column,type
+日期,date,類別
+月報所屬日期,m_date,類別
+季報所屬日期,q_date,類別
+證券代碼,company_id,類別
+外資買賣超(張),foreign_investors,數值
+投信買賣超(張),investment_banks ,數值
+自營買賣超(張),dealer,數值
+合計買賣超(張),all_institutional_investors,數值
+外資買賣超日數,foreign_investors_day,數值
+投信買賣超日數,investment_banks_days,數值
+自營買賣超日數,dealer_days,數值
+法人買賣超日數,all_institutional_investors_days,數值
+董監持股％,directors_stock_ratio,數值
+董監持股數,directors_stock,數值
+融資餘額(張),financing_balance,數值
+融券餘額(張),margin_balance,數值
+券資比,sale_margin_purchase_ratio,數值
+融券增減比率,margin_balance_ratio,數值
+融資增減比率,financing_balance_ratio,數值
+200-400 張(比率),200_400_ratio,數值
+400-600 張(比率),400_600_ratio,數值
+600-800 張(比率),600_800_ratio,數值
+800-1000張(比率),800_1000_ratio,數值
+1000張以上(比率),1000up_ratio,數值
+上市別,market_type,類別
+產業別,industry,類別
+公司,company_name,類別
+產業名稱,industry_name,類別
+資本額,capital,數值
+規模,scale,類別
+開盤價(元),open,數值
+最高價(元),high,數值
+最低價(元),low,數值
+收盤價(元),close,數值
+成交量(千股),volume,數值
+5日均價(元),ma5,數值
+10日均價(元),ma10,數值
+20日均價(元),ma20,數值
+60日均價(元),ma60,數值
+5日均量,mavol_5,數值
+10日均量,mavol_10,數值
+20日均量,mavol_20,數值
+60日均量,mavol_60,數值
+營收發布日,revenue_release_date,類別
+單月營收(千元),revenue_m,數值
+去年單月營收(千元),revenue_m_lastyear,數值
+單月營收成長率％, revenue_vs_lastyear_ratio,數值
+單月營收與上月比％, revenue_mom_ratio,數值
+單月營收與上月比％-成長月數, revenue_growth_month,數值
+累計營收(千元),cumulative_revenue,數值
+去年累計營收(千元),cumulative_revenue_lastyear,數值
+累計營收成長率％, cumulative_revenue_vs_lastyear_ratio,數值
+季別,Q,類別
+季報發布日,q_report_issued,類別
+每股盈餘,EPS,數值
+當季季底P/B,PB,數值
+當季季底PSR,PSR,數值
+當季季底P/E,PE,數值
+ROA(C)稅前息前折舊前,ROA_C,數值
+ROA(A)稅後息前,ROA_A,數值
+ROA(B)稅後息前折舊前,ROA_B,數值
+ROE(A)－稅後,ROE_A,數值
+ROE(B)－常續利益,ROE_B,數值
+營業利益率,operating_profit_margin,數值
+營業利益成長率,operating_profit_growth_rate,數值
+營業利益變動率, operating_profit_variability_rate,數值
+營業利益 /實收資本比,operating_profit_to_paid-up_capital_ratio,數值
+常續利益率－稅後,net_income_margin,數值
+淨利變動率（單季）,net_profit_variability_rate_Q,數值
+稅前息前折舊前淨利率,ebitda_margin,數值
+稅前淨利率, earnings_before_tax_margin,數值
+稅前淨利成長率,earnings_before_tax_growth_rate,數值
+稅後淨利率,net_profit_margin,數值
+稅後淨利成長率,net_profit_growth_rate,數值
+季底普通股市值,stock_market_value_EOQ,數值
+營收成長率,revenue_growth_rate,數值
+營收變動率,revenue_variability_rate,數值
+淨值/資產,equity_to_assets_ratio,數值
+總資產成長率,total_asset_growth_rate,數值
+總資產週轉次數,total_asset_turnover_ratio,數值
+業外收支/營收,NOIR,數值
+營業毛利率,gross_profit_rate,數值
+營業毛利成長率,gross_profit_growth_rate,數值
+已實現銷貨毛利成長率,realized_sales_gross_profit_growth_rate,數值
+已實現銷貨毛利率, realized_sales_gross_profit_margin,數值
+自由現金流量(D), free_cash_flow,數值
+營業收入淨額,net_operating_revenue,數值
+股東權益總額,shareholders_equity,數值
+來自營運之現金流量,cash_flow_from_operations,數值
+指數名稱,index_name,類別
+指數開盤價(元),index_open,數值
+指數最高價(元),index_high,數值
+指數最低價(元),index_low,數值
+指數收盤價(元),index_close,數值
+指數成交量(千股),index_volume,數值
+指數5日均價(元),index_ma5,數值
+指數10日均價(元),index_ma10,數值
+指數20日均價(元),index_ma20,數值
+指數60日均價(元),index_ma60,數值
+指數5日均量,index_mavol_5,數值
+指數10日均量,index_mavol_10,數值
+指數20日均量,index_mavol_20,數值
+指數60日均量,index_mavol_60,數值
+區間最高價(元),,數值
+,,

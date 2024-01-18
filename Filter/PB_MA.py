@@ -45,8 +45,6 @@ def PB_MA(q_data,start_d,s_data):
     last_1_records = s_data.groupby('證券代碼').head(1)
 
     #找出均線多頭排列且股價在所有均線之上
-    # filtered_df = last_1_records[(last_1_records['收盤價(元)'] > last_1_records['60日均價(元)'])]
-
     filtered_df = last_1_records[(last_1_records['收盤價(元)'] > last_1_records['5日均價(元)']) &
                (last_1_records['5日均價(元)'] > last_1_records['10日均價(元)']) &
                (last_1_records['10日均價(元)'] > last_1_records['20日均價(元)'])]
@@ -56,14 +54,3 @@ def PB_MA(q_data,start_d,s_data):
     selected_companies = integrate_selected_companies(selected_companies1, selected_companies2)
 
     return selected_companies
-
-def integrate_selected_companies(selected_companies1, selected_companies2):
-    # 將兩個列表轉換為集合
-    set_selected_companies1 = set(selected_companies1)
-    set_selected_companies2 = set(selected_companies2)
-
-    # 取兩者的交集
-    integrated_selected_companies = set_selected_companies1.intersection(set_selected_companies2)
-
-    # 將結果轉換為列表
-    return list(integrated_selected_companies)
