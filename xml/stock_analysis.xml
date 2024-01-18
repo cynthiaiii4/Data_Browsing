@@ -2,45 +2,60 @@
 <StockAnalysis>
   <Graph>
     <ChartType>displot</ChartType>
-    <X>區間股價變化率(最高價)</X>
+    <X>區間最大股價變化率</X>
   </Graph>
   <Graph>
     <ChartType>countplot</ChartType>
-    <X>規模</X>
+    <X>產業名稱</X>
   </Graph>
   <Graph>
-    <Y>區間股價變化率(最高價)</Y>
+    <Y>區間最大股價變化率</Y>
     <ChartType>violinplot</ChartType>
-    <X>規模</X>
+    <X>產業名稱</X>
   </Graph>
   <Graph>
-    <Y>區間股價變化率(最高價)</Y>
+    <Y>區間最大股價變化率</Y>
     <ChartType>catplot</ChartType>
-    <Chart_parm>bar</Chart_parm>
+    <Chart_parm>box</Chart_parm>
     <X>規模</X>
   </Graph>
   <Graph>
-    <Y>區間股價變化率(最高價)</Y>
+    <Y>區間最大股價變化率</Y>
     <ChartType>scatter</ChartType>
-    <X>最高價當日融資餘額(張)變化</X>
+    <X>10日均量</X>
   </Graph>
   <Graph>
-    <Y>區間股價變化率(最高價)</Y>
+    <Y>區間最大股價變化率</Y>
     <ChartType>regplot</ChartType>
-    <X>最高價當日-融券餘額(張)</X>
+    <X>成交量(千股)</X>
   </Graph>
   <Graph>
-    <Y>區間股價變化率(最高價)</Y>
+    <Y>區間最大股價變化率</Y>
+    <ChartType>regplot</ChartType>
+    <X>5日均量</X>
+  </Graph>
+  <Graph>
+    <Y>區間最大股價變化率</Y>
+    <ChartType>regplot</ChartType>
+    <X>10日均量</X>
+  </Graph>
+  <Graph>
+    <Y>區間最大股價變化率</Y>
+    <ChartType>regplot</ChartType>
+    <X>券資比</X>
+  </Graph>
+  <Graph>
+    <Y>區間最大股價變化率</Y>
     <ChartType>bubbleplot</ChartType>
-    <X>最高價當日融券餘額(張)變化</X>
-    <X>最高價當日融券餘額(張)變化率</X>
+    <X>券資比</X>
+    <X>5日均量</X>
   </Graph>
   <Graph>
-    <Y>區間股價變化率(最高價)</Y>
+    <Y>區間最大股價變化率</Y>
     <ChartType>pairplot</ChartType>
-    <X>最高價當日融資餘額(張)變化</X>
-    <X>最高價當日-券資比</X>
-    <X>最高價當日-融券餘額(張)</X>
-    <X>最高價當日融券餘額(張)變化</X>
+    <X>成交量(千股)</X>
+    <X>5日均量</X>
+    <X>10日均量</X>
+    <X>券資比</X>
   </Graph>
 </StockAnalysis>
