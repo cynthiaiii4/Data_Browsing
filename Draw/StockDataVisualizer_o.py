@@ -17,11 +17,8 @@ class StockDataVisualizer:
     '''
     def get_heat_map_all(self):
         df=self.filtered_data
-        df['區間最大股價變化率'].fillna(0, inplace=True)
-        # 將無窮大值（inf）替換為除了inf外的最大值
-        max_value_without_inf = df['區間最大股價變化率'].replace([np.inf, -np.inf], np.nan).max(skipna=True)
-        df['區間最大股價變化率'].replace([np.inf, -np.inf], max_value_without_inf, inplace=True)
-
+        # max_value= df['區間最大股價變化率'].max()
+        # min_value = df['區間最大股價變化率'].min()
         max_value = np.clip(df['區間最大股價變化率'].max(), 10, 50)
         min_value = np.clip(df['區間最大股價變化率'].min(), -10, -50)
         df=df[df['區間最大股價變化率'].notnull() | df['區間最大股價變化率'].notna()]
@@ -29,7 +26,7 @@ class StockDataVisualizer:
 
         fig = px.treemap(
             df, 
-            path=['產業名稱','公司'],  # category型
+            path=['公司'],  # category型
             values='資本額(千萬)', 
             color='區間最大股價變化率', 
             hover_data=['證券代碼','公司', '資本額', '規模', '產業名稱', '區間最大股價變化率', '區間最大股價變化率'],
@@ -64,20 +61,40 @@ class StockDataVisualizer:
 
         # 動態圖
         # 建立數據df
-        pie_data = pd.DataFrame({'證券代碼': df['證券代碼'], '產業名稱':df['產業名稱'],'區間最大股價變化率':df['區間最大股價變化率'] })
-        # 定義自定義函數判斷上漲或下跌
-        def label_trend(row):
-            return '上漲' if row['區間最大股價變化率'] >= 0 else '下跌'
-        pie_data['漲跌'] = pie_data.apply(label_trend, axis=1)
-        pie_data['Counts']=1
+        pie_data = pd.DataFrame({'產業名稱': category_counts.index, 'Counts': category_counts.values})
 
-        #繪圖
-        fig = px.sunburst(pie_data, path=['產業名稱', '漲跌'], values='Counts', custom_data=['Counts'])
-        #調整顯示和hover內容
-        fig.update_layout(margin=dict(l=0, r=0, b=0, t=0))
-        fig.update_traces(textinfo='label+value+percent parent')
-        hover_template = f'<b>%{{label}}</b><br>Counts: %{{customdata[0]}}<br>佔比: %{{percentParent:.0%}}'
-        fig.update_traces(hovertemplate=hover_template)
+        # 計算同一產業下，區間最大股價變化率>0和<=0的數量
+        positive_counts = []
+        negative_counts = []
+
+        for industry in pie_data['產業名稱']:
+            positive_count = len(df[(df['產業名稱'] == industry) & (df['區間最大股價變化率'] > 0)])
+            negative_count = len(df[(df['產業名稱'] == industry) & (df['區間最大股價變化率'] <= 0)])
+            positive_counts.append(positive_count)
+            negative_counts.append(negative_count)
+
+        pie_data['上漲家數'] = positive_counts
+        pie_data['下跌家數'] = negative_counts
+
+        hovertext = []
+        for _ ,row in pie_data.iterrows():
+            hovertext.append(f"{row['產業名稱']}")
+        # hover後的內容
+        hoverinfo = []
+        hovertemplate = []
+        for _, row in pie_data.iterrows():
+            hoverinfo.append(f"{row['產業名稱']}<br>Counts: {row['Counts']}<br>上漲家數: {row['上漲家數']}<br>下跌家數: {row['下跌家數']}")
+            hovertemplate.append(f"{row['產業名稱']}<br>Counts: {row['Counts']}<br>上漲家數: {row['上漲家數']}<br>下跌家數: {row['下跌家數']}")
+
+        fig = go.Figure(data=[go.Pie(
+            labels=pie_data['產業名稱'],
+            values=pie_data['Counts'],
+            hoverinfo='text+percent',
+            text=hovertext,
+            hovertemplate=hovertemplate,
+            name=''
+        )])
+        fig.update_traces(textposition='inside', textinfo='percent+label')
         fig.show()
         fig.write_html('graph/1/my_pie_plot.html')
         
