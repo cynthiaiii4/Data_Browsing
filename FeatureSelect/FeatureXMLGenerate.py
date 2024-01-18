@@ -17,7 +17,7 @@ def FeatureXMLGenerate(features):
     chart_type=ET.Element("ChartType")
     chart_type.text = "displot"
     x_element = ET.Element("X")
-    x_element.text = "區間股價變化率(最高價)"
+    x_element.text = "區間最大股價變化率"
     graph.append(chart_type)
     graph.append(x_element)
     root.append(graph)
@@ -35,7 +35,7 @@ def FeatureXMLGenerate(features):
     #violinplot
     graph = ET.Element("Graph")
     y_element=ET.Element("Y")
-    y_element.text = "區間股價變化率(最高價)"
+    y_element.text = "區間最大股價變化率"
     graph.append(y_element)
     chart_type=ET.Element("ChartType")
     chart_type.text = "violinplot"
@@ -51,26 +51,27 @@ def FeatureXMLGenerate(features):
     #catplot
     graph = ET.Element("Graph")
     y_element=ET.Element("Y")
-    y_element.text = "區間股價變化率(最高價)"
+    y_element.text = "區間最大股價變化率"
     graph.append(y_element)
     chart_type=ET.Element("ChartType")
     chart_type.text = "catplot"
     graph.append(chart_type)
     chart_parm=ET.Element("Chart_parm")
-    chart_parm.text = "bar"
+    chart_parm.text = "box"
     graph.append(chart_parm)
     x_element = ET.Element("X")
-    if len(categorical_features)>3:
-        x_element.text = categorical_features[2]
-    else:
-        x_element.text = categorical_features[0]
+    x_element.text='規模'
+    # if len(categorical_features)>3:
+    #     x_element.text = categorical_features[2]
+    # else:
+    #     x_element.text = categorical_features[0]
     graph.append(x_element)
     root.append(graph)
 
     #scatter
     graph = ET.Element("Graph")
     y_element=ET.Element("Y")
-    y_element.text = "區間股價變化率(最高價)"
+    y_element.text = "區間最大股價變化率"
     graph.append(y_element)
     chart_type=ET.Element("ChartType")
     chart_type.text = "scatter"
@@ -80,24 +81,25 @@ def FeatureXMLGenerate(features):
     graph.append(x_element)
     root.append(graph)
 
-    #regplot
-    graph = ET.Element("Graph")
-    y_element=ET.Element("Y")
-    y_element.text = "區間股價變化率(最高價)"
-    graph.append(y_element)
-    chart_type=ET.Element("ChartType")
-    chart_type.text = "regplot"
-    graph.append(chart_type)
-    x_element = ET.Element("X")
-    x_element.text = numeric_features[0]
-    graph.append(x_element)
-    root.append(graph)
+    #regplot(每個非類別因子都畫)
+    for numeric in numeric_features:
+        graph = ET.Element("Graph")
+        y_element=ET.Element("Y")
+        y_element.text = "區間最大股價變化率"
+        graph.append(y_element)
+        chart_type=ET.Element("ChartType")
+        chart_type.text = "regplot"
+        graph.append(chart_type)
+        x_element = ET.Element("X")
+        x_element.text = numeric
+        graph.append(x_element)
+        root.append(graph)
 
     #bubbleplot
     if len(numeric_features)>1:
         graph = ET.Element("Graph")
         y_element=ET.Element("Y")
-        y_element.text = "區間股價變化率(最高價)"
+        y_element.text = "區間最大股價變化率"
         graph.append(y_element)
         chart_type=ET.Element("ChartType")
         chart_type.text = "bubbleplot"
@@ -120,7 +122,7 @@ def FeatureXMLGenerate(features):
     if len(numeric_features)>3:
         graph = ET.Element("Graph")
         y_element=ET.Element("Y")
-        y_element.text = "區間股價變化率(最高價)"
+        y_element.text = "區間最大股價變化率"
         graph.append(y_element)
         chart_type=ET.Element("ChartType")
         chart_type.text = "pairplot"

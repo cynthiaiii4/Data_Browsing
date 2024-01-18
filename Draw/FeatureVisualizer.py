@@ -65,6 +65,7 @@ class FeatureVisualizer:
         regplot=1
         violinplot=1
         bubbleplot=1
+        order = ['大', '中', '小']
         for key, values in graph_dict.items():
             y = values['Y']
             chart_type = values['ChartType']
@@ -84,7 +85,7 @@ class FeatureVisualizer:
             elif chart_type == 'catplot':
                 
                 fig = plt.figure(figsize=(10, 6))
-                sns.catplot(x=values['X'][0], y=y, data=data, kind= chart_parm )  
+                sns.catplot(x=values['X'][0], y=y, data=data, kind= chart_parm,order=order )  
                 plt.xticks(rotation=90)
                 plt.title(f'Catplot of {values["X"][0]} vs {y}')
                 plt.savefig(f'graph/1/catplot{catplot}.png')
@@ -104,7 +105,10 @@ class FeatureVisualizer:
             elif chart_type == 'countplot':
                 
                 fig = plt.figure()
-                ax = sns.countplot(x=values['X'][0], data=data) 
+                if values['X'][0]=='規模':
+                    ax = sns.countplot(x=values['X'][0], data=data,order=order) 
+                else:
+                    ax = sns.countplot(x=values['X'][0], data=data) 
                 plt.xticks(rotation=90)
                 plt.savefig(f'graph/1/countplot{countplot}.png')
                 pdf_pages.savefig(fig)
@@ -124,7 +128,7 @@ class FeatureVisualizer:
             elif chart_type == 'regplot':
 
                 fig = plt.figure()
-                ax = sns.regplot(x=values['X'][0], y=y, data=data)
+                ax = sns.regplot(x=values['X'][0], y=y, data=data,ci=0)
                 plt.xticks(rotation=90)
                 plt.savefig(f'graph/1/regplot{regplot}.png') 
                 pdf_pages.savefig(fig)
@@ -134,7 +138,10 @@ class FeatureVisualizer:
             elif chart_type == 'violinplot':
 
                 fig = plt.figure()
-                sns.violinplot(x=data[values['X'][0]], y=data[y])
+                if values['X'][0]=='規模':
+                    sns.violinplot(x=data[values['X'][0]], y=data[y],order=order)
+                else:
+                    sns.violinplot(x=data[values['X'][0]], y=data[y])
                 plt.xticks(rotation=90)
                 x_axis = plt.gca().xaxis
                 x_axis.set_tick_params(rotation=45)
@@ -183,7 +190,7 @@ class FeatureVisualizer:
         # 移除指定的元素
         # combinations_list = [combo for combo in combinations_list if not any(col in combo for col in dropcol)]
         
-        if len(data)<250:
+        if len(data)<750:
             q=3
         else:
             q=5
@@ -196,6 +203,10 @@ class FeatureVisualizer:
                 # 動態生成新的欄位名稱，將原名稱後面添加 '_b'
                 col_name_b = col_name + '_b'
                 row_name_b = row_name + '_b'
+                max_length = 6
+                #欄位太長換行
+                col_name_b = col_name_b[:max_length] + ('\n' if len(col_name_b) > max_length else '') + col_name_b[max_length:]
+                row_name_b = row_name_b[:max_length] + ('\n' if len(row_name_b) > max_length else '') + row_name_b[max_length:]
                 print(col_name_b)
                 print(row_name_b)
                 # 根據類型,動態設定 col 和 row 參數
@@ -219,11 +230,10 @@ class FeatureVisualizer:
                 # 將 row_categories 反轉
                 row_order = reversed(row_categories)
 
-                p = sns.FacetGrid(data, col=col_name_b, row=row_name_b, hue='證券代碼', margin_titles=True,height=5, aspect=1.2,row_order=row_order)
+                p = sns.FacetGrid(data, col=col_name_b, row=row_name_b, hue='證券代碼', margin_titles=True,row_order=row_order)
                 
                     # 自定義繪圖函數
                 def custom_scatter(x,y,*args, **kwargs):
-                    print(f"lowess: {kwargs.get('lowess', 'Not specified')}")
                     ax = plt.gca()  # 獲取當前子圖的座標軸對象
                     ax.spines['bottom'].set_linewidth(3) # 設定底部線條寬度
                     ax.spines['left'].set_linewidth(3)   # 設定左側線條寬度
@@ -234,14 +244,14 @@ class FeatureVisualizer:
                     # 設定 Y 軸刻度標籤格式，以包含負號
                     ax.xaxis.set_major_formatter(ticker.FormatStrFormatter("%+.2f"))
                     ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%+.2f"))
-                    sns.regplot(x=x, y=y,scatter=False, line_kws={"color": "red", "zorder": 10},**kwargs)
+                    sns.regplot(x=x, y=y,*args, **kwargs)
 
                 # 調整標題與圖的距離
                 plt.subplots_adjust(top=0.7)  # 調整標題與圖的距離，可以根據需要調整top值
                 #設定標題
-                p.fig.suptitle(f"在不同{col_name}(X) 和 {row_name}(Y)區間中，{scatter_col}(x)和區間股價變化率(y)的表現", fontsize=16)
-                # p.map(custom_scatter, scatter_col, '區間股價變化率(最高價)')
-                p.map(sns.regplot, scatter_col, '區間股價變化率(最高價)')
+                p.fig.suptitle(f"在不同{col_name}(X) 和 {row_name}(Y)區間中，\n{scatter_col}(x)和區間最大股價變化率(y)的表現", fontsize=16)
+                p.map(custom_scatter, scatter_col, '區間最大股價變化率',lowess=True)
+                #沒資料的子圖也要套用同樣式
                 for ax in p.axes.flat:
                     ax.spines['bottom'].set_linewidth(3)
                     ax.spines['left'].set_linewidth(3)
