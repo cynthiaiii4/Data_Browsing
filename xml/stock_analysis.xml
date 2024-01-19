@@ -22,40 +22,40 @@
   <Graph>
     <Y>區間最大股價變化率</Y>
     <ChartType>scatter</ChartType>
-    <X>10日均量</X>
+    <X>指數開盤價(元)</X>
   </Graph>
   <Graph>
     <Y>區間最大股價變化率</Y>
     <ChartType>regplot</ChartType>
-    <X>成交量(千股)</X>
+    <X>指數10日均價(元)</X>
   </Graph>
   <Graph>
     <Y>區間最大股價變化率</Y>
     <ChartType>regplot</ChartType>
-    <X>5日均量</X>
+    <X>指數60日均價(元)</X>
   </Graph>
   <Graph>
     <Y>區間最大股價變化率</Y>
     <ChartType>regplot</ChartType>
-    <X>10日均量</X>
+    <X>指數開盤價(元)</X>
   </Graph>
   <Graph>
     <Y>區間最大股價變化率</Y>
     <ChartType>regplot</ChartType>
-    <X>券資比</X>
+    <X>指數最低價(元)</X>
   </Graph>
   <Graph>
     <Y>區間最大股價變化率</Y>
     <ChartType>bubbleplot</ChartType>
-    <X>券資比</X>
-    <X>5日均量</X>
+    <X>指數最低價(元)</X>
+    <X>指數60日均價(元)</X>
   </Graph>
   <Graph>
     <Y>區間最大股價變化率</Y>
     <ChartType>pairplot</ChartType>
-    <X>成交量(千股)</X>
-    <X>5日均量</X>
-    <X>10日均量</X>
-    <X>券資比</X>
+    <X>指數10日均價(元)</X>
+    <X>指數60日均價(元)</X>
+    <X>指數開盤價(元)</X>
+    <X>指數最低價(元)</X>
   </Graph>
 </StockAnalysis>

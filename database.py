@@ -377,7 +377,7 @@ class Database:
     # 取得欄位資料(column_info)
     def get_column_info(self):
         DATA_DIR = ''
-        FILE_NAME = 'data/column_info2.csv'
+        FILE_NAME = 'data/column_info3.csv'
         data_path = os.path.join(DATA_DIR, FILE_NAME)
         df_from_db = pd.read_csv(data_path)
         column_mapping = dict(zip(df_from_db['column'], df_from_db['column_zh']))
