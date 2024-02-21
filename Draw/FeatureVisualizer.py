@@ -203,7 +203,7 @@ class FeatureVisualizer:
                 # 動態生成新的欄位名稱，將原名稱後面添加 '_b'
                 col_name_b = col_name + '_b'
                 row_name_b = row_name + '_b'
-                max_length = 6
+                max_length = 5
                 #欄位太長換行
                 col_name_b = col_name_b[:max_length] + ('\n' if len(col_name_b) > max_length else '') + col_name_b[max_length:]
                 row_name_b = row_name_b[:max_length] + ('\n' if len(row_name_b) > max_length else '') + row_name_b[max_length:]

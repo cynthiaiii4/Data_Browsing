@@ -57,6 +57,13 @@ class GetFilterData:
 
         # 將 '季報所屬日期' 列填充為對應的 '季報所屬日期'
         stock_data['季報所屬日期'] = stock_data.apply(find_next_date, args=(q_data, '季報發布日', '季報所屬日期',), axis=1)
+
+        #調整欄位名稱
+        stock_data=self.getNewStockColName(stock_data)
+        chips_data=self.getNewChipsColName(chips_data)
+        market_data=self.getNewMarketColName(market_data)
+
+        #合併
         final_merged_df = pd.merge(stock_data, m_data, on=['月報所屬日期', '證券代碼'], how='left').merge(q_data, on=['季報所屬日期', '證券代碼'], how='left').merge(chips_data, on=['日期', '證券代碼'], how='left').merge(self.company_data, on=['證券代碼'], how='left').merge(market_data,left_on=['日期', '上市別'], right_on=['日期', '指數名稱'], how='left')
         return final_merged_df
 
@@ -85,4 +92,19 @@ class GetFilterData:
         # 計算 "區間最高股價變化率"
         result_df['區間最大股價變化率'] = ((result_df['區間最高價(元)'] - result_df['最低價(元)'])/result_df['最低價(元)']*100).round(2)
         return result_df  
+  
+    def getNewStockColName(self,stock_data):
+        columns_to_add_prefix = ['開盤價(元)', '最高價(元)', '最低價(元)', '收盤價(元)', '成交量(千股)', '5日均價(元)', '10日均價(元)', '20日均價(元)', '60日均價(元)', '5日均量', '10日均量', '20日均量', '60日均量']
+        stock_data.rename(columns={col: '分析起日-' + col for col in columns_to_add_prefix}, inplace=True)
+        return stock_data
+
+    def getNewChipsColName(self,chips_data):
+        columns_to_add_prefix = ['外資買賣超(張)', '投信買賣超(張)', '自營買賣超(張)', '合計買賣超(張)', '外資買賣超日數', '投信買賣超日數', '自營買賣超日數', '法人買賣超日數', '董監持股％', '董監持股數', '融資餘額(張)', '融券餘額(張)', '券資比', '融券增減比率', '融資增減比率', '200-400 張(比率)', '400-600 張(比率)', '600-800 張(比率)', '800-1000張(比率)', '1000張以上 (比率)']
+        chips_data.rename(columns={col: '分析起日-' + col for col in columns_to_add_prefix}, inplace=True)
+        return chips_data
+
+    def getNewMarketColName(self,market_data):
+        columns_to_add_prefix = ['指數開盤價(元)', '指數最高價(元)', '指數最低價(元)', '指數收盤價(元)', '指數成交量(千股)', '指數5日平均點數', '指數10日平均點數', '指數20日平均點數', '指數60日平均點數', '指數5日均量', '指數10日均量', '指數20日均量', '指數60日均量']
+        market_data.rename(columns={col: '分析起日-' + col for col in columns_to_add_prefix}, inplace=True)
+        return market_data
     

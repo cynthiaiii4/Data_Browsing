@@ -22,40 +22,45 @@
   <Graph>
     <Y>區間最大股價變化率</Y>
     <ChartType>scatter</ChartType>
-    <X>指數開盤價(元)</X>
+    <X>分析起日-800-1000張(比率)</X>
   </Graph>
   <Graph>
     <Y>區間最大股價變化率</Y>
     <ChartType>regplot</ChartType>
-    <X>指數10日均價(元)</X>
+    <X>營業利益變動率</X>
   </Graph>
   <Graph>
     <Y>區間最大股價變化率</Y>
     <ChartType>regplot</ChartType>
-    <X>指數60日均價(元)</X>
+    <X>營業利益成長率</X>
   </Graph>
   <Graph>
     <Y>區間最大股價變化率</Y>
     <ChartType>regplot</ChartType>
-    <X>指數開盤價(元)</X>
+    <X>分析起日-800-1000張(比率)</X>
   </Graph>
   <Graph>
+    <X>FCF_OI</X>
     <Y>區間最大股價變化率</Y>
     <ChartType>regplot</ChartType>
-    <X>指數最低價(元)</X>
+  </Graph>
+  <Graph>
+    <X>OCF_E</X>
+    <Y>區間最大股價變化率</Y>
+    <ChartType>regplot</ChartType>
   </Graph>
   <Graph>
     <Y>區間最大股價變化率</Y>
     <ChartType>bubbleplot</ChartType>
-    <X>指數最低價(元)</X>
-    <X>指數60日均價(元)</X>
+    <X>稅前淨利成長率</X>
+    <X>營業利益成長率</X>
   </Graph>
   <Graph>
     <Y>區間最大股價變化率</Y>
     <ChartType>pairplot</ChartType>
-    <X>指數10日均價(元)</X>
-    <X>指數60日均價(元)</X>
-    <X>指數開盤價(元)</X>
-    <X>指數最低價(元)</X>
+    <X>營業利益變動率</X>
+    <X>營業利益成長率</X>
+    <X>分析起日-800-1000張(比率)</X>
+    <X>稅前淨利成長率</X>
   </Graph>
 </StockAnalysis>

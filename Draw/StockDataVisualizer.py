@@ -127,9 +127,9 @@ class StockDataVisualizer:
         fig = px.bar(grouped_data, x='股價變化率分组', y='公司', labels={'股價變化率分组': '股價變化率'})
 
         fig.update_layout(
-            xaxis_title="股價變化率",
+            xaxis_title="區間最大股價變化率",
             yaxis_title="數量",
-            title="個股漲跌概況",
+            title="個股區間最大股價變化率漲跌概況",
             xaxis={'categoryorder': 'total ascending'},
             xaxis_categoryorder='category ascending'
         )

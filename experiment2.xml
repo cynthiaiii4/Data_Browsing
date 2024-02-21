@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<!-- <StockAnalysis>
+    <role>投信買賣超日數</role>
+    <days>3</days>
+</StockAnalysis> -->
+
+
+<FilterParam>
+    <role>投信買賣超日數</role>
+    <days>3</days>
+</FilterParam>
+
+
+
+
