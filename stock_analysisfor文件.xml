@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<Graphs>
+  <Graph>
+    <X>規模</X>
+    <ChartType>countplot</ChartType>
+  </Graph>
+  <Graph>
+    <Y>區間最大股價變化率</Y>
+    <X>規模</X>
+    <ChartType>violinplot</ChartType>
+  </Graph>
+  <Graph>
+    <Y>區間最大股價變化率</Y>
+    <X>當季季底P/E</X>
+    <ChartType>scatter</ChartType>
+  </Graph>
+  <Graph>
+    <Y>區間最大股價變化率</Y>
+    <X>規模</X>
+    <ChartType>catplot</ChartType>
+    <Chart_parm>box</Chart_parm>
+  </Graph>
+  <Graph>
+    <Y>區間最大股價變化率</Y>
+    <X>規模</X>
+    <X>營業利益成長率</X>
+    <X>當季季底P/E</X>
+    <X>股東權益總額</X>
+    <ChartType>pairplot</ChartType>
+  </Graph>
+  <Graph>
+    <X>區間最大股價變化率</X>
+    <ChartType>displot</ChartType>
+  </Graph>
+    <Graph>
+    <Y>區間最大股價變化率</Y>
+    <X>當季季底P/E</X>
+    <X>資本額</X>
+    <ChartType>bubbleplot</ChartType>
+  </Graph>
+  <Graph>
+    <Y>區間最大股價變化率</Y>
+    <X>當季季底P/E</X>
+    <ChartType>regplot</ChartType>
+  </Graph>
+</Graphs>
+
